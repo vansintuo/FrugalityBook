@@ -1,0 +1,45 @@
+.loginContainer {
+  width: 30%;
+  margin: auto;
+  margin-top: 5%;
+  position: absolute;
+  padding-bottom:'15px';
+  height:'300px';
+  font-family: 'Source Sans 3', sans-serif;
+}
+.loginPaper {
+  width: 100%;
+  height:'300px';
+ 
+}
+.loginImage {
+  border-radius: 10px;
+}
+.form1 {
+  width: 90%;
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid paleturquoise;
+  font-size: 12pt;
+  padding: 10px;
+  border-radius: 20px;
+  outline: none;
+
+}
+.form2 {
+  width: 90%;
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid paleturquoise;
+  font-size: 12pt;
+  padding: 10px;
+  border-radius: 20px;
+
+  outline: none;
+}
+.formCheckBox {
+  margin-top: 3%;
+  margin-left: 5%;
+}

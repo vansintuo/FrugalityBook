@@ -1,0 +1,88 @@
+.registerPaper {
+  width: 100%;
+  margin: auto;
+  padding-bottom: 20px;
+}
+.input1 {
+  width: 44%;
+  margin-top: 3%;
+  margin-left: 5%;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #00bdd7;
+  border-radius: 20px;
+  font-size: 12pt;
+
+  margin-top: 3%;
+}
+.input2 {
+  width: 44%;
+  margin-top: 3%;
+  margin-left: 2%;
+  border: 1px solid #00bdd7;
+  ;
+  font-size: 12pt;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #00bdd7;
+  border-radius: 20px;
+  margin-top: 3%;
+}
+.form11 {
+  width: 90%;
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-top: 3%;
+  border: 1px solid #00bdd7;
+  font-size: 12pt;
+  padding: 10px;
+  border-radius: 20px;
+  outline: none;
+}
+.form1 {
+  width: 90%;
+  font-size: 12pt;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+}
+.formSelectLabel{
+  margin-left:5%;
+  color:grey;
+}
+.formSelect {
+  width: 71%;
+  padding-right:10px;
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-top: 3%;
+  border: 1px solid #00bdd7;
+  font-size: 12pt;
+  padding: 10px;
+  border-radius: 20px;
+  outline: none;
+  color:grey;
+}
+.form2 {
+  width: 85%;
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #00bdd7;
+  font-size: 12pt;
+  padding: 10px;
+  border-radius: 20px;
+  outline: none;
+}
+.form3 {
+  width: 85%;
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #00bdd7;
+  font-size: 12pt;
+  padding: 10px;
+  border-radius: 20px;
+  outline: none;
+}

@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test book card  snapshot 1`] = `
+<a
+  href="/"
+>
+  <ForwardRef(Paper)
+    className="makeStyles-container-1"
+    elevation={1}
+  >
+    <div
+      className="makeStyles-blur-2"
+    />
+    <div
+      className="makeStyles-img-4"
+    >
+      <img
+        height={230}
+        objectFit="cover"
+        src="https://th.bing.com/th/id/R.e5c4280b62848eee1fd82ef9f9a64934?rik=AcJi%2ftTkIm7eFA&pid=ImgRaw&r=0"
+        width={180}
+      />
+    </div>
+    <div
+      className="makeStyles-text-3"
+    >
+      <h4
+        style={
+          Object {
+            "color": "white",
+            "marginBottom": "0px",
+            "marginTop": "3px",
+            "paddingLeft": "15px",
+          }
+        }
+      >
+        Writing Book
+      </h4>
+      <ForwardRef(Typography)
+        noWrap={true}
+        style={
+          Object {
+            "color": "grey",
+            "fontWeight": "500",
+            "paddingLeft": "15px",
+          }
+        }
+      >
+        This book is good for you to read .
+      </ForwardRef(Typography)>
+    </div>
+    <div
+      style={
+        Object {
+          "bottom": "5px",
+          "position": "absolute",
+          "right": "15px",
+        }
+      }
+    >
+      <ForwardRef(Typography)
+        style={
+          Object {
+            "color": "red",
+            "fontWeight": "800",
+          }
+        }
+      >
+        From : $
+        15
+      </ForwardRef(Typography)>
+    </div>
+  </ForwardRef(Paper)>
+</a>
+`;
