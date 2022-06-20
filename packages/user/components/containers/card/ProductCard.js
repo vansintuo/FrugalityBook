@@ -22,7 +22,7 @@ const useStyle = makeStyles({
     height: "50px",
   },
   Sellmor: {
-    marginLeft: "95%",
+    marginLeft: "90%",
     textDecoration: "none",
     cursor: "pointer",
   },
