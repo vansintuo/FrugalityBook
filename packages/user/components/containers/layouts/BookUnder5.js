@@ -67,7 +67,7 @@ const BookUnder5 = ({ data }) => {
           // check price book under 5$
           dataBook
             ?.filter((item) => {
-              return item.price < 50;
+              return item.price < 5;
             })
             .map((el, index) => {
               if (index <= 2) {
