@@ -56,7 +56,7 @@ const StudentSpeech = () => {
             }}
           />
           <div className={classes.name}>
-            <h3>Mr.JonhSon</h3>
+            <h3 style={{color:'#00bdd7'}}>Mr.JonhSon</h3>
             <p>Takeo,Cambodia</p>
           </div>
         </div>
