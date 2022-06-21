@@ -21,11 +21,11 @@ const useStyle = makeStyles({
   Paper: {
     height: "50px",
   },
-  // Sellmor: {
-  //   marginLeft: "95%",
-  //   textDecoration: "none",
-  //   cursor: "pointer",
-  // },
+  Sellmor: {
+    marginLeft: "95%",
+    textDecoration: "none",
+    cursor: "pointer",
+  },
 });
 export default function MediaCard() {
   const classes = useStyle();
