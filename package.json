@@ -11,7 +11,8 @@
     "seller": "yarn workspace seller dev",
     "user": "yarn workspace user dev",
     "admin": "yarn workspace admin dev",
-    "server": "yarn workspace backend dev"
+    "server": "yarn workspace backend dev",
+    "userBuild":"yarn workspace user build"
   },
   "browser": {
     "fs": false,

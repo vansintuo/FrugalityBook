@@ -46,18 +46,16 @@ const ErrorPage = () => {
           <Box pt={2}>
             <Typography className={classes.Title}>Data not Found</Typography>
             <Typography className={classes.Decs}>
-              The data you are looking doesn't still exist in our system .
+              The data you are looking doesn&apos;t still exist in our system .
             </Typography>
           </Box>
           <Box pt={4}>
-            <Link>
-              <a href="/">
+            <Link href="/">
                 <Typography className={classes.buttonUI}>
                   <Button variant="contained" size="large">
                     GO HOME
                   </Button>
                 </Typography>
-              </a>
             </Link>
           </Box>
         </Box>

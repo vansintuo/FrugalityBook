@@ -214,7 +214,7 @@ const UsersBasket = () => {
       <div style={{ marginTop: "20px", marginBottom: "10px" }}>
         <Grid container rowSpacing={2}>
           {products?.map((item, index) => {
-            return (<Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
+            return (<Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <CardProduct
                   url={item.link}

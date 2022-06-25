@@ -43,7 +43,7 @@ const InputImageForSelling = ({ name ,defaultImageURL=null,}) => {
                    style={{ fontSize: 100, color: "rgba(0,0,0,0.2)" }}
                  ></AddAPhotoIcon>
                  :
-                  <img src={defaultImageURL} width={200} height="fitObject"></img>
+                  <img src={defaultImageURL} width={200} height="fitObject" alt={'book'}></img>
                  }
             <p style={{color:'#00bdd7'}}>UPLOAD PICTURES</p>
               </div>

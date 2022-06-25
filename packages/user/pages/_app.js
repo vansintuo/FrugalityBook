@@ -6,7 +6,6 @@ import SignUPDialog from "../components/containers/layouts/SignUpDialog";
 import { useRouter } from "next/router";
 import { RecoilRoot, useRecoilState, useResetRecoilState } from "recoil";
 import { makeStyles } from "@mui/styles";
-import ProtectedRoute from "../components/authGuard/ProtectedRoute";
 import Footer from "../components/containers/Footer";
 import { redirectUser } from "../utils/functions/auth/authUser";
 import { destroyCookie, parseCookies } from "nookies";

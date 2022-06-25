@@ -33,7 +33,7 @@ const Navbar = ({ user }) => {
                 <Toolbar>
                     {isMacth ?
                         <>
-                        <a href='/'>
+                        <Link href='/'>
                                 <Typography
                                 sx={{ paddingRight: '30px', display: responsiveAndHoverSearch ? 'none' : '' }}>
                                 <img
@@ -41,11 +41,11 @@ const Navbar = ({ user }) => {
                                     height={40}
                                     src="/assets/books/bookLogo.png"></img>
                             </Typography>
-                        </a>
+                        </Link>
                             <Typography sx={{ display: responsiveAndHoverSearch ? 'none' : '', marginLeft: 'auto' }}><Drawerv1 user={user} /></Typography>
                         </>
                         : <>
-                            <a href='/'>
+                            <Link href='/'>
                             <Typography
                                 sx={{ paddingRight: '50px' }}>
                                 <img
@@ -53,7 +53,7 @@ const Navbar = ({ user }) => {
                                     height={43}
                                     src="/assets/books/bookLogo.png"></img>
                             </Typography>
-                            </a>
+                            </Link>
                             <Typography
                                 variant="h6"
                                 sx={{ marginRight: '20px' }}>
