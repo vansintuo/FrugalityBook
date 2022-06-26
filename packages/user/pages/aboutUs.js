@@ -64,7 +64,7 @@ const AboutUs = () => {
           <div className={classes.Dese} style={{ pading: "10px" }}>
             <div></div>
             <div>
-              <Typography style={{ fontSize: "20px",marginLeft:40,fontWeight:"bold" ,color:"#fff" ,fontFamily:"Roboto" }}>VansinTuo</Typography>
+              <Typography style={{ fontSize: "20px",marginLeft:40,fontWeight:"bold" ,color:"#fff"  }}>VansinTuo</Typography>
               <Typography style={{fontSize:"20px",marginLeft:10 ,color:"#fff"}}>deverlop and desing</Typography>
             </div>
             <div style={{marginLeft:10,color:"#fff"}}>
@@ -89,7 +89,7 @@ const AboutUs = () => {
           <div className={classes.Dese} style={{ pading: "10px" }}>
             <div></div>
             <div>
-              <Typography style={{ fontSize: "20px",marginLeft:40,fontWeight:"bold" ,color:"#fff" ,fontFamily:"Roboto" }}>Ly Tykea</Typography>
+              <Typography style={{ fontSize: "20px",marginLeft:40,fontWeight:"bold" ,color:"#fff" }}>Ly Tykea</Typography>
               <Typography style={{fontSize:"20px",marginLeft:10 ,color:"#fff"}}>deverlop and desing</Typography>
             </div>
             <div style={{marginLeft:10,color:"#fff"}}>
@@ -112,7 +112,7 @@ const AboutUs = () => {
           <div className={classes.Dese} style={{ pading: "10px" }}>
             <div></div>
             <div>
-              <Typography style={{ fontSize: "20px",marginLeft:30,fontWeight:"bold" ,color:"#fff" ,fontFamily:"Roboto" }}>Touch Sievmy</Typography>
+              <Typography style={{ fontSize: "20px",marginLeft:30,fontWeight:"bold" ,color:"#fff" }}>Touch Sievmy</Typography>
               <Typography style={{fontSize:"20px",marginLeft:10 ,color:"#fff"}}>deverlop and desing</Typography>
             </div>
             <div style={{marginLeft:10,color:"#fff"}}>
@@ -137,7 +137,7 @@ const AboutUs = () => {
           <div className={classes.Dese} style={{ pading: "10px" }}>
             <div></div>
             <div>
-              <Typography style={{ fontSize: "20px",marginLeft:40,fontWeight:"bold" ,color:"#fff" ,fontFamily:"Roboto" }}>Oem Phirun</Typography>
+              <Typography style={{ fontSize: "20px",marginLeft:40,fontWeight:"bold" ,color:"#fff" }}>Oem Phirun</Typography>
               <Typography style={{fontSize:"20px",marginLeft:10 ,color:"#fff"}}>deverlop and desing</Typography>
             </div>
             <div style={{marginLeft:10,color:"#fff"}}>

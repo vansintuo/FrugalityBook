@@ -25,7 +25,6 @@ const SellForm = ({ onOpen, dataUpdate, handleClose, openSellMore, user, style})
       alignContent: "center",
       alignItems: "center",
       position: "relative",
-      fontFamily: "Lato",
     },
     subContainer: {
       position: "relative",
@@ -67,7 +66,6 @@ const SellForm = ({ onOpen, dataUpdate, handleClose, openSellMore, user, style})
     inputField: {
       width: "230px",
       marginBottom: "15px",
-      fontFamily: "Lato",
     },
     selectField: {
       width: "230px",
@@ -76,7 +74,6 @@ const SellForm = ({ onOpen, dataUpdate, handleClose, openSellMore, user, style})
       border: "none",
       backgroundColor: "rgba(0,0,0,0.2)",
       padding: "10px",
-      fontFamily: "Lato",
     },
   });
 
@@ -207,7 +204,7 @@ const SellForm = ({ onOpen, dataUpdate, handleClose, openSellMore, user, style})
       
         <Paper elevation={3} >
           <div style={{ marginLeft: "15px", marginBottom: "25px," }}>
-            <h4 style={{ marginBottom: "-1px", fontFamily: "Lato" }}>
+            <h4 style={{ marginBottom: "-1px" }}>
               {dataUpdate || file
                 ? "Update Product Informations : "
                 : "Sell your product : "}

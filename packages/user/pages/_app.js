@@ -15,15 +15,11 @@ import Navbar from "../components/containers/layouts/Navbar";
 import axios from "axios";
 const useStyle = makeStyles({
   container: {
-    fontFamily: "Lato",
     fontWeight: "bold",
     boxSizing: "border-box",
   },
 });
 const theme = createTheme({
-  typography: {
-    fontFamily: "Barlow",
-  },
   palette: {
     secondary: {
       main: "#f50057",

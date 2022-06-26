@@ -22,9 +22,6 @@ import axios from "axios";
 import nookie from 'nookies';
 import { signIn } from "../../../utils/functions/auth/authUser";
 const theme = createTheme({
-  typography: {
-    fontFamily: "Quicksand",
-  },
   palette: {
     secondary: {
       main: "#f50057",
@@ -209,7 +206,6 @@ const LoginDialog = () => {
                           textAlign:'center',
                           paddingBottom:'10px',
                           fontSize:'10px',
-                          fontFamily:'Lato',
                           color:'grey',
                           }}>
                           Copyright &copy; FrugalityBook2021

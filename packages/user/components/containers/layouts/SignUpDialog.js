@@ -20,9 +20,6 @@ import { useRecoilState } from "recoil";
 import { signUp } from "../../../utils/functions/auth/authUser";
 
 const theme = createTheme({
-  typography: {
-    fontFamily: "Quicksand",
-  },
   palette: {
     secondary: {
       main: "#f50057",

@@ -27,7 +27,7 @@ const InputImageForSelling = ({ name ,defaultImageURL=null,}) => {
           <br />
           <button
             onClick={() => setImgUrl(null)}
-            style={{ color: "red", border: "none", fontSize:'15px',fontFamily:'sans-serif'}}
+            style={{ color: "red", border: "none", fontSize:'15px',}}
           >
             Delete
           </button>

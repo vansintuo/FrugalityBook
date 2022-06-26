@@ -17,7 +17,6 @@ const useStyle = makeStyles({
     borderRadius: "5px",
     position: "relative",
     color: "white",
-    fontFamily: "Lato",
     fontSize:'15px',
   },
   subcontainer: {
@@ -83,7 +82,7 @@ const UserProfile = ({user}) => {
         <Avatar
           className={classes.profile}
           // alt={user.user.profile}
-          style={{color:'#00bdd7',fontSize:'60px',fontFamily:'Lato',}}
+          style={{color:'#00bdd7',fontSize:'60px'}}
         >
          {/* {user.user.fullname} */}
         </Avatar>

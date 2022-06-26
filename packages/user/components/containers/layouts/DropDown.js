@@ -72,7 +72,6 @@ export default function DropDown() {
                     direction="row"
                     alignItems="center"
                     color="#00bdd7"
-                    fontFamily="Lato"
                     variant="h6"
                     fontSize='18px'
                 >
