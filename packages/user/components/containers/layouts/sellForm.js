@@ -102,7 +102,7 @@ const SellForm = ({ onOpen, dataUpdate, handleClose, openSellMore, user, style})
             allImagePaths.push(imgPath.fullPath);
             if (src.files.length == allImageNames.length) {
               updateData(
-                `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/${dataUpdate.id}`,
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/${dataUpdate._id}`,
                 {
                   title: title.value,
                   author: author.value,
@@ -115,8 +115,9 @@ const SellForm = ({ onOpen, dataUpdate, handleClose, openSellMore, user, style})
                 }
               )
                 .then((res) => {
-                  console.log("success");
+                  Toastify(res.statusCode, res.message)
                   setLoading1(false);
+                  setEditState(!editState)
                   onOpen = !onOpen;
                   
                   // window.location.reload();
