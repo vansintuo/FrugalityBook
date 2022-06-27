@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Paper, Grid } from "@mui/material";
+import { Paper, Grid, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 const BookCard = ({ src, title, description, price, href }) => {
   const useStyle = makeStyles((theme) => ({
@@ -21,7 +21,7 @@ const BookCard = ({ src, title, description, price, href }) => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      backdropFilter:'blur(4px)'
+      backdropFilter: "blur(4px)",
     },
     img: {
       display: "flex",
@@ -41,21 +41,13 @@ const BookCard = ({ src, title, description, price, href }) => {
       "& h4": {
         marginTop: "0px",
         marginBottom: "0px",
-        height:'35px',
-        width:'300px',
-        overflow:'hidden',
+        height: "35px",
+        width: "300px",
+        overflow: "hidden",
       },
       "& p": {
         marginTop: "0px",
         marginBottom: "0px",
-      },
-    },
-
-    Price: {
-      marginLeft: "70px",
-      color:'white',
-      "$ h4": {
-        marginTop: "5px",
       },
     },
   }));
@@ -69,18 +61,48 @@ const BookCard = ({ src, title, description, price, href }) => {
           </div>
           <div className={classes.text}>
             <Grid container alignItems="stretch">
-              <Grid xs={6}>
+              <Grid xs={8}>
                 <div className={classes.Title}>
-                  <h4 style={{ marginLeft: "15px" }}>{title}</h4>
-                  <p style={{ marginLeft: "15px", fontWeight: "500" }}>
-                    {" "}
-                    {description}
-                  </p>
+                  <Typography
+                    variant="h4"
+                    fontSize="1.3rem"
+                    style={{ marginLeft: "15px", color: "#36454F" }}
+                  >
+                    {title}
+                  </Typography>
+                  <div
+                    style={{
+                      color: "#36454F",
+                      marginLeft: "15px",
+                      height: "45px",
+                      // verticalAlign: "middle",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      style={{ maxHeight: "45px", overflow: "hidden" }}
+                    >
+                      {description}
+                    </Typography>
+                  </div>
                 </div>
               </Grid>
-              <Grid xs={6}>
-                <div className={classes.Price}>
-                  <h4>Price:${price}</h4>
+              <Grid
+                xs={4}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                <div
+                  style={{
+                    color: "white",
+                  }}
+                >
+                  <Typography variant="body2" fontSize="0.9rem">
+                    Price: {price}$
+                  </Typography>
                 </div>
               </Grid>
             </Grid>
