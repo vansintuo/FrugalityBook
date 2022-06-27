@@ -24,7 +24,7 @@ const BestSeller = ({ data }) => {
   });
   const classes = useStyle();
   return (
-    <div>
+    <div style={{ width: "94%", marginLeft: "3%" }}>
       <div style={{ textAlign: "center", margin: "10px 0 5px 0" }}>
         <Typography
           style={{
@@ -57,7 +57,7 @@ const BestSeller = ({ data }) => {
           They have been purchased regularly.
         </Typography>
       </div>
-      <Grid container rowSpacing={2} columnSpacing={1}>
+      <Grid container rowSpacing={2} columnSpacing={2}>
         {console.log("data book :::::", dataBook)}
         {dataBook.map((item, index) => {
           if (index <= 1)
@@ -66,7 +66,7 @@ const BestSeller = ({ data }) => {
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: fix ? "center" : "flex-end",
+                    justifyContent: "center",
                   }}
                 >
                   <BestSellerCard
