@@ -11,7 +11,7 @@ const BestSellerCard2 = ({ src, title, description, href = "" }) => {
   const matching = useMediaQuery(theme.breakpoints.up("md"));
   const useStyle = makeStyles({
     container: {
-      //   width: matching ? "32vw" : "85vw",
+      width: "100%",
       maxHeight: "120px",
       cursor: "pointer",
     },
@@ -45,9 +45,14 @@ const BestSellerCard2 = ({ src, title, description, href = "" }) => {
             xl={9}
             rowSpacing={1}
           >
-            <div style={{ marginLeft: "10px" }}>
+            <div style={{ marginLeft: "10px", width: "100%" }}>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                <Typography variant="h6" fontSize={"1.2rem"}>
+                <Typography
+                  style={{ margin: "1% 0 2% 0" }}
+                  variant="h6"
+                  fontSize={"1.2rem"}
+                  noWrap
+                >
                   {title}
                 </Typography>
               </Grid>
