@@ -49,7 +49,7 @@ const BestSellerCard = ({ src, title, author, description, href = "" }) => {
         </div>
 
         <div>
-          <Typography variant="h6" fontSize={"1.2rem"}>
+          <Typography variant="h6" fontSize={"1.2rem"} noWrap>
             {title}
           </Typography>
         </div>
