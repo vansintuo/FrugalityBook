@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { Dialog } from "@mui/material";
 import { useRouter } from "next/router";
 import firebase from "../../../services/firebase-config";
-import {openSUState, openSIState} from "../../../states/SignInSignUp";
+import { openSUState, openSIState } from "../../../states/SignInSignUp";
 import { useRecoilState } from "recoil";
 import { signUp } from "../../../utils/functions/auth/authUser";
 
@@ -53,6 +53,7 @@ const useStyles = makeStyles({
     border: "1px solid #00bdd7",
     fontSize: "17px",
     cursor: "pointer",
+    color: "white",
   },
 });
 
@@ -61,7 +62,7 @@ const SignUPDialog = () => {
   const router = useRouter();
   const [loading1, setLoading1] = React.useState(false);
   const [openSU, setOpenSU] = useRecoilState(openSUState);
-  const [openSI , setOpenSI] = useRecoilState(openSIState);
+  const [openSI, setOpenSI] = useRecoilState(openSIState);
   const [errorMessage, setErrorMessage] = React.useState("");
   const [errorConfirmPassword, setErrorConfirmPassword] = React.useState("");
   const [type, setType] = React.useState("password");
@@ -100,15 +101,23 @@ const SignUPDialog = () => {
     const email = el_value.email.value;
     const password = el_value.password.value;
     if (confirmPassword.value === password) {
-      console.log('called')
+      console.log("called");
       // function post data
-        await signUp(fullName, email, password, userRole, setErrorMessage , setOpenSI, setOpenSU)
-      
-        setLoading1(false)
-        setErrorConfirmPassword("")
+      await signUp(
+        fullName,
+        email,
+        password,
+        userRole,
+        setErrorMessage,
+        setOpenSI,
+        setOpenSU
+      );
+
+      setLoading1(false);
+      setErrorConfirmPassword("");
     } else {
       setErrorConfirmPassword("Password not match!!");
-      setErrorMessage("")
+      setErrorMessage("");
       setLoading1(false);
     }
   };
@@ -121,13 +130,17 @@ const SignUPDialog = () => {
             setOpenSU(false);
             setLoading1(false);
             setErrorConfirmPassword("");
-            setErrorMessage("")
+            setErrorMessage("");
           }}
         >
           <Paper className={registerStyles.registerPaper} elevation={5}>
             <Grid container spacing={0}>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                <Typography className={classes.Typography} variant="h6">
+                <Typography
+                  className={classes.Typography}
+                  variant="h6"
+                  style={{ color: "#36454F" }}
+                >
                   Sign Up an account
                 </Typography>
                 <form onSubmit={handleCreateUser}>
@@ -229,6 +242,7 @@ const SignUPDialog = () => {
                   <FormControlLabel
                     className={classes.FormControlLabel}
                     control={<Checkbox required></Checkbox>}
+                    style={{ color: "#36454F" }}
                     label="I accept Term of Use"
                   ></FormControlLabel>
                   <p style={{ color: "red", textAlign: "center" }}>
