@@ -5,16 +5,15 @@ import { makeStyles } from "@mui/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Typography } from "@mui/material";
-import { minWidth } from "@mui/system";
 import Link from "next/link";
-const BestSellerCard2 = ({ src, title, description, href='' }) => {
+const BestSellerCard2 = ({ src, title, description, href = "" }) => {
   const theme = useTheme();
   const matching = useMediaQuery(theme.breakpoints.up("md"));
   const useStyle = makeStyles({
     container: {
       //   width: matching ? "32vw" : "85vw",
       maxHeight: "120px",
-      cursor:'pointer'
+      cursor: "pointer",
     },
     imageContainer: {
       maxWidth: "120px",
@@ -36,7 +35,16 @@ const BestSellerCard2 = ({ src, title, description, href='' }) => {
               />
             </div>
           </Grid>
-          <Grid item container xs={9} sm={9} md={9} lg={9} xl={9} rowSpacing={1}>
+          <Grid
+            item
+            container
+            xs={9}
+            sm={9}
+            md={9}
+            lg={9}
+            xl={9}
+            rowSpacing={1}
+          >
             <div style={{ marginLeft: "10px" }}>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <Typography variant="h6" fontSize={"1.2rem"}>

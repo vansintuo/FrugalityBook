@@ -85,7 +85,7 @@ const BestSeller = ({ data }) => {
             {dataBook.map((item, index) => {
               if (index <= 2)
                 return (
-                  <div style={{ margin: "10px 0 10px 0" }} key={index}>
+                  <div style={{ margin: "0px 0 10px 0" }} key={index}>
                     <BestSellerCard2
                       src={item.link}
                       title={item.title}
