@@ -118,10 +118,9 @@ const UsersBasket = () => {
     if (result) {
       for (let i = 0; i < result.data.length; i++) {
         const data = await unauthorFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/${result.data[i].bookId[0]}`)
-        console.log('data ::::::::::', data.data)
-        dataStore.push({ checkoutId: result.data[i]._id, ...data.data[0] })
+        //push checkout Id and all data to store in one other model
+        data.data[0] && dataStore.push({ checkoutId: result.data[i]._id, ...data.data[0] })
       }
-      console.log('data store :::::::::::', dataStore)
       dataStore !=[] && convertPathToURL(dataStore).then((res) => {
         setProducts(res)
       })
@@ -200,7 +199,7 @@ const UsersBasket = () => {
           <CheckoutButton
             onClick={()=>router.push('https://www.facebook.com/FrugalityBook-104791435445732')}
             style={{ float: 'right', top: '2vh' }}>Checkout</CheckoutButton>
-        <SimpleButton
+        {/* <SimpleButton
           label={'Add More'}
           onClick={() => router.push('/')}
           style={{ 
@@ -209,7 +208,7 @@ const UsersBasket = () => {
             marginRight:'8px',
             height:'37px',
             color:'black'
-            }} />
+            }} /> */}
       </div>
       <div style={{ marginTop: "20px", marginBottom: "10px" }}>
         <Grid container rowSpacing={2}>
