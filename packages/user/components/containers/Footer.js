@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Container } from "@mui/material";
 import { Typography } from "@mui/material";
 import Fab from "@mui/material/Fab";
-
+import Image from "next/image"
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   LinkClass: {
@@ -210,7 +210,7 @@ export default function Footer() {
             </Typography>
               <Box className={classes.container1}>
                 <Fab size="medium">
-                  <img
+                  <Image
                     width={32}
                     height={32}
                     src="/assets/icons/media/youtube.png"
@@ -218,14 +218,20 @@ export default function Footer() {
                   />
                 </Fab>
                 <Fab size="medium">
-                  <img
+                  {/* <Image
                     width={32}
                     height={32}
                     src="/assets/icons/media/twitter.png"
+                  /> */}
+                    <Image
+                    width={32}
+                    height={32}
+                    src="/assets/icons/media/twitter.png"
+                    alt="facebook"
                   />
                 </Fab>
                 <Fab size="medium">
-                  <img
+                  <Image
                     width={32}
                     height={32}
                     src="/assets/icons/media/facebook.png"
@@ -233,7 +239,7 @@ export default function Footer() {
                   />
                 </Fab>
                 <Fab size="medium">
-                  <img
+                  <Image
                     width={32}
                     height={32}
                     src="/assets/icons/media/instagram.png"
