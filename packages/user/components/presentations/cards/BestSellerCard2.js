@@ -50,7 +50,7 @@ const BestSellerCard2 = ({ src, title, description, href = "" }) => {
                 <Typography
                   style={{ margin: "1% 0 2% 0" }}
                   variant="h6"
-                  fontSize={"1.2rem"}
+                  fontSize={"1.3rem"}
                   noWrap
                 >
                   {title}
