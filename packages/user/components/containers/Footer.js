@@ -14,6 +14,9 @@ const useStyles = makeStyles({
       color: "red",
     },
   },
+  container1:{
+    textAlign:'center'
+  }
 });
 export default function Footer() {
   const classes = useStyles();
@@ -30,15 +33,13 @@ export default function Footer() {
         borderTopLeftRadius: "5px",
         width: "100%",
         paddingBottom: "15px",
-        position:'relative',
-        top:'auto'
+        position: "relative",
+        top: "auto",
       }}
     >
       <Box fontSize="30">
         <Container maxWidth="lg">
           <Grid container spacing={5}>
-           
-
             <Grid item xs={12} sm={4}>
               <Typography
                 style={{
@@ -207,40 +208,39 @@ export default function Footer() {
             >
               Follow Us
             </Typography>
-
-            <Box style={{ marginLeft: "41.5%" }}>
-              <Fab size="medium">
-                <img
-                  width={32}
-                  height={32}
-                  src="/assets/icons/media/youtube.png"
-                  alt="youtube"
-                />
-              </Fab>
-              <Fab size="medium">
-                <img
-                  width={32}
-                  height={32}
-                  src="/assets/icons/media/twitter.png"
-                />
-              </Fab>
-              <Fab size="medium">
-                <img
-                  width={32}
-                  height={32}
-                  src="/assets/icons/media/facebook.png"
-                  alt="facebook"
-                />
-              </Fab>
-              <Fab size="medium">
-                <img
-                  width={32}
-                  height={32}
-                  src="/assets/icons/media/instagram.png"
-                  alt="instagram"
-                />
-              </Fab>
-            </Box>
+              <Box className={classes.container1}>
+                <Fab size="medium">
+                  <img
+                    width={32}
+                    height={32}
+                    src="/assets/icons/media/youtube.png"
+                    alt="youtube"
+                  />
+                </Fab>
+                <Fab size="medium">
+                  <img
+                    width={32}
+                    height={32}
+                    src="/assets/icons/media/twitter.png"
+                  />
+                </Fab>
+                <Fab size="medium">
+                  <img
+                    width={32}
+                    height={32}
+                    src="/assets/icons/media/facebook.png"
+                    alt="facebook"
+                  />
+                </Fab>
+                <Fab size="medium">
+                  <img
+                    width={32}
+                    height={32}
+                    src="/assets/icons/media/instagram.png"
+                    alt="instagram"
+                  />
+                </Fab>
+              </Box>
           </Grid>
         </Container>
       </Box>
