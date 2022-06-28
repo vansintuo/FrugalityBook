@@ -17,7 +17,6 @@ const BookCard = ({ src, title, description, price, href }) => {
     blur: {
       width: "320px",
       height: "340px",
-      // backgroundColor: "rgba(255,255,255,0.6)",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -67,6 +66,7 @@ const BookCard = ({ src, title, description, price, href }) => {
                     variant="h4"
                     fontSize="1.3rem"
                     style={{ marginLeft: "15px", color: "#36454F" }}
+                    noWrap
                   >
                     {title}
                   </Typography>
@@ -75,7 +75,7 @@ const BookCard = ({ src, title, description, price, href }) => {
                       color: "#36454F",
                       marginLeft: "15px",
                       height: "45px",
-                      // verticalAlign: "middle",
+                      verticalAlign: "middle",
                     }}
                   >
                     <Typography
