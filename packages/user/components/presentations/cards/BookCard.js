@@ -65,7 +65,7 @@ const BookCard = ({ src, title, description, price, href }) => {
                   <Typography
                     variant="h4"
                     fontSize="1.3rem"
-                    style={{ marginLeft: "15px", color: "#36454F" }}
+                    style={{ marginLeft: "15px", color: "#36454F",marginTop:"7px" }}
                     noWrap
                   >
                     {title}
