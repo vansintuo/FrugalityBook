@@ -5,18 +5,18 @@ import Link from "next/link";
 import { Container } from "@mui/material";
 import { Typography } from "@mui/material";
 import Fab from "@mui/material/Fab";
-import Image from "next/image"
+import Image from "next/image";
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   LinkClass: {
-    color: "black",
+    color: "#36454F",
     "&:hover": {
       color: "red",
     },
   },
-  container1:{
-    textAlign:'center'
-  }
+  container1: {
+    textAlign: "center",
+  },
 });
 export default function Footer() {
   const classes = useStyles();
@@ -43,9 +43,9 @@ export default function Footer() {
             <Grid item xs={12} sm={4}>
               <Typography
                 style={{
-                  borderBottom: "1px solid red",
+                  borderBottom: "1px solid white",
                   fontSize: "20px",
-                  color: "black",
+                  color: "#36454F",
                   fontWeight: "bold",
                 }}
               >
@@ -92,9 +92,9 @@ export default function Footer() {
             <Grid item xs={12} sm={4}>
               <Typography
                 style={{
-                  borderBottom: "1px solid red",
+                  borderBottom: "1px solid white",
                   fontSize: "20px",
-                  color: "black",
+                  color: "#36454F",
                   fontWeight: "bold",
                 }}
               >
@@ -148,9 +148,9 @@ export default function Footer() {
             <Grid item xs={12} sm={4}>
               <Typography
                 style={{
-                  borderBottom: "1px solid red",
+                  borderBottom: "1px solid white",
                   fontSize: "20px",
-                  color: "black",
+                  color: "#36454F",
                   fontWeight: "bold",
                 }}
               >
@@ -194,49 +194,53 @@ export default function Footer() {
           <Grid item xs={12} style={{ marginTop: "35px" }}>
             {/* <hr style={{ border: "none", backgroundColor: "white", height: 2 }} /> */}
             <Typography
-              style={{ fontSize: "20px", textAlign: "center", color: "black" }}
+              style={{
+                fontSize: "20px",
+                textAlign: "center",
+                color: "#36454F",
+              }}
             >
               Follow Us
             </Typography>
-              <Box className={classes.container1}>
-                <Fab size="medium">
-                  <Image
-                    width={32}
-                    height={32}
-                    src="/assets/icons/media/youtube.png"
-                    alt="youtube"
-                  />
-                </Fab>
-                <Fab size="medium">
-                  {/* <Image
+            <Box className={classes.container1}>
+              <Fab size="medium">
+                <Image
+                  width={32}
+                  height={32}
+                  src="/assets/icons/media/youtube.png"
+                  alt="youtube"
+                />
+              </Fab>
+              <Fab size="medium">
+                {/* <Image
                     width={32}
                     height={32}
                     src="/assets/icons/media/twitter.png"
                   /> */}
-                    <Image
-                    width={32}
-                    height={32}
-                    src="/assets/icons/media/twitter.png"
-                    alt="facebook"
-                  />
-                </Fab>
-                <Fab size="medium">
-                  <Image
-                    width={32}
-                    height={32}
-                    src="/assets/icons/media/facebook.png"
-                    alt="facebook"
-                  />
-                </Fab>
-                <Fab size="medium">
-                  <Image
-                    width={32}
-                    height={32}
-                    src="/assets/icons/media/instagram.png"
-                    alt="instagram"
-                  />
-                </Fab>
-              </Box>
+                <Image
+                  width={32}
+                  height={32}
+                  src="/assets/icons/media/twitter.png"
+                  alt="facebook"
+                />
+              </Fab>
+              <Fab size="medium">
+                <Image
+                  width={32}
+                  height={32}
+                  src="/assets/icons/media/facebook.png"
+                  alt="facebook"
+                />
+              </Fab>
+              <Fab size="medium">
+                <Image
+                  width={32}
+                  height={32}
+                  src="/assets/icons/media/instagram.png"
+                  alt="instagram"
+                />
+              </Fab>
+            </Box>
           </Grid>
         </Container>
       </Box>
