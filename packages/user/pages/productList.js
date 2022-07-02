@@ -1,9 +1,9 @@
 import { makeStyles } from "@mui/styles";
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { Box, DialogTitle, Grid} from "@mui/material";
-import { Button} from "@mui/material";
-import { Dialog, DialogActions, Paper} from "@mui/material";
+import { Box, DialogTitle, Grid } from "@mui/material";
+import { Button } from "@mui/material";
+import { Dialog, DialogActions, Paper } from "@mui/material";
 import SellForm from "../components/containers/layouts/sellForm";
 import deleteData from "../utils/functions/api/deleteData";
 import updateState from "../states/updateState";
@@ -13,6 +13,7 @@ import { convertPathToURL } from "../utils/functions/data/convertPathToURL";
 import useSocket from "../sockets/useSocket";
 import CardProduct from "../components/presentations/cards/CardProduct";
 import SimpleButton from "../components/presentations/buttons/SimpleButton";
+import fetcher from "../utils/functions/api/fetcher";
 const useStyle = makeStyles({
   subContainer: {
     textAlign: "center",
@@ -34,6 +35,7 @@ const useStyle = makeStyles({
 
 export async function getServerSideProps(ctx) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
+  console.log("res :::::::>>>", res);
   const data = await res.json();
   return {
     props: {
@@ -104,18 +106,24 @@ const ProductList = ({ user, data }) => {
           <h3>Loading...</h3>
         ) : (
           <h3 style={{ marginBottom: 0 }}>
-            Your Product List <p style={{ marginTop: 0, color: '#00bdd7' }}>
-              ({products?.length}{" "}
-              {products?.length >= 2 ? "items" : "item"})
+            Your Product List{" "}
+            <p style={{ marginTop: 0, color: "#00bdd7" }}>
+              ({products?.length} {products?.length >= 2 ? "items" : "item"})
             </p>
           </h3>
         )}
       </Paper>
-      <div style={{ width: '90%', margin: '0 auto' }}>
-        <SimpleButton 
-        label={'Sell More'} 
-        onClick={openSellMoreFunc} 
-        style={{ borderRadius: '5px', float: 'right', top: '2vh' }} />
+      <div style={{ width: "90%", margin: "0 auto" }}>
+        <SimpleButton
+          label={"Sell More"}
+          onClick={openSellMoreFunc}
+          style={{
+            borderRadius: "5px",
+            float: "right",
+            top: "2vh",
+            fontSixe: "12px",
+          }}
+        />
       </div>
       <Grid
         container
@@ -140,7 +148,6 @@ const ProductList = ({ user, data }) => {
                   onClickDelete={() => handleDeleteDialog(item)}
                 />
               </div>
-
             </Grid>
           );
         })}

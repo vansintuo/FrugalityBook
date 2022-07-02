@@ -4,7 +4,7 @@ const io = require("../server");
 // ::::::::::::::::::::::::::::::::::::::::::::: create book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 const createBook = async (req, res) => {
-
+  console.log("req::::", req);
   const body = req.body;
   const book = new db.books({
     title: body.title,
@@ -54,6 +54,20 @@ const getBook = async (req, res) => {
     res.status(200).send({ data: response, count: response.length });
   }
 };
+//:::::::::::::::::::::::get book for seller :::::::::::::::::
+const getBookSeller = async (req, res) => {
+  const books = await db.books.find();
+  let data = [];
+  for (let i = 0; i < books.length; i++) {
+    if (books[i].userId == req.userId) {
+      data.push(books[i]);
+    }
+  }
+  if (data.length != 0) {
+    io.emit("book", data);
+    res.status(200).send({ data: data });
+  } else res.status(200).send({ message: "No Products!" });
+};
 // :::::::::::::::::::::::::::::::::::::::::::::: update book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 const updateBook = async (req, res) => {
@@ -75,7 +89,6 @@ const updateBook = async (req, res) => {
 // :::::::::::::::::::::::::::::::::::::::::::::: delete book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 const deleteBook = async (req, res) => {
-
   const param = req.params;
   try {
     const response = await db.books.findOneAndDelete({ _id: param.id });
@@ -95,4 +108,5 @@ module.exports = {
   getBook,
   updateBook,
   deleteBook,
+  getBookSeller,
 };

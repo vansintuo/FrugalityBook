@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps, token }) {
     <div className={classes.container}>
       <Header />
       <ThemeProvider theme={theme}>
-      <ToastContainer/>
+        <ToastContainer />
         <RecoilRoot>
           {router.pathname == "/" ||
           router.pathname == "/home" ||
@@ -47,21 +47,21 @@ function MyApp({ Component, pageProps, token }) {
           router.pathname == "tryTest/status" ||
           // router.pathname ==='/productDetail/[id]' ||
           // router.pathname == "/sellProduct"||
-          router.pathname === "/tryTest/dropdown"||
+          router.pathname === "/tryTest/dropdown" ||
           // router.pathname === "/bookCategories/[category]"||
-          router.pathname == "/tryTest/toastify"? (
+          router.pathname == "/tryTest/toastify" ? (
             <>
-              <Navbar user={pageProps?.user}/>
-              <SearchBarLayout/>
+              <Navbar user={pageProps?.user} />
+              <SearchBarLayout />
               <SignUPDialog />
               <LoginDialog />
-              <Component {...pageProps} user={pageProps?.user}/>
+              <Component {...pageProps} user={pageProps?.user} />
               <Footer />
             </>
           ) : (
             <>
               {/* <Navbar/> */}
-              <SearchBarLayout/>
+              <SearchBarLayout />
               <SignUPDialog />
               <LoginDialog />
               <Component {...pageProps} user={pageProps?.user} />
@@ -80,26 +80,25 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   let authorize = {};
   const token = parseCookies(ctx)?.user_token;
   const publicRoutes =
-    ctx.pathname ==='/productDetail/[id]' ||
-    ctx.pathname === "/bookCategories/[category]"||
+    ctx.pathname === "/productDetail/[id]" ||
+    ctx.pathname === "/bookCategories/[category]" ||
     ctx.pathname === "/donate" ||
-    ctx.pathname === "/freeBook"||
-    ctx.pathname === "/contact" 
-  
+    ctx.pathname === "/freeBook" ||
+    ctx.pathname === "/contact";
+
   const protectedRoutes =
-    ctx.pathname === "/usersBasket" ||
-    ctx.pathname === "/sellProduct" 
-    // ctx.pathname ===token?"/productDetail/[id]":"" ||
-    // ctx.pathname === "/bookCategories/[category]";
-    // check token
+    ctx.pathname === "/usersBasket" || ctx.pathname === "/sellProduct";
+  // ctx.pathname ===token?"/productDetail/[id]":"" ||
+  // ctx.pathname === "/bookCategories/[category]";
+  // check token
   if (!token) {
     if (publicRoutes) {
-      return <Component {...pageProps}/>
-    } 
+      return <Component {...pageProps} />;
+    }
     protectedRoutes && redirectUser(ctx, "/");
   } else {
-    if(publicRoutes){
-      <Component {...pageProps} user={pageProps?.user} />
+    if (publicRoutes) {
+      <Component {...pageProps} user={pageProps?.user} />;
     }
     try {
       authorize = JSON.parse(token);
