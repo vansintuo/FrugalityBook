@@ -31,13 +31,14 @@ const BestSeller = ({ data }) => {
             display: "inline-block",
             marginRight: "4px",
             color: "#00bdd7",
+            fontSize: "30px",
           }}
           variant="h5"
         >
           Best-Selling
         </Typography>
         <Typography
-          style={{ display: "inline-block", marginLeft: "4px" }}
+          style={{ display: "inline-block", marginLeft: "4px" ,   fontSize: "30px",}}
           variant="h5"
         >
           Books
@@ -45,7 +46,7 @@ const BestSeller = ({ data }) => {
       </div>
       <div className={classes.bestSellerDescription}>
         <Typography
-          style={{ display: "inline-block", marginRight: "4px" }}
+          style={{ display: "inline-block", marginRight: "4px" ,marginTop:"10px" }}
           variant="subtitle1"
         >
           These are the best seller.

@@ -101,6 +101,7 @@ export default function Footer() {
                 Categories
               </Typography>
 
+          
               <Box>
                 <Link href="/homePage" color="inherit">
                   <a
@@ -108,38 +109,27 @@ export default function Footer() {
                     style={{ textDecoration: "none" }}
                   >
                     {" "}
+                    Management
+                  </a>
+                </Link>
+              </Box>
+              <Box>
+                <Link href="/homePage" color="inherit">
+                  <a
+                    className={classes.LinkClass}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Financce
+                  </a>
+                </Link>
+              </Box>
+              <Box>
+                <Link href="/homePage" color="inherit">
+                  <a
+                    className={classes.LinkClass}
+                    style={{ textDecoration: "none" }}
+                  >
                     Economic
-                  </a>
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/homePage" color="inherit">
-                  <a
-                    className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
-                  >
-                    {" "}
-                    Math
-                  </a>
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/homePage" color="inherit">
-                  <a
-                    className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
-                  >
-                    Khmer
-                  </a>
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/homePage" color="inherit">
-                  <a
-                    className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
-                  >
-                    Law
                   </a>
                 </Link>
               </Box>

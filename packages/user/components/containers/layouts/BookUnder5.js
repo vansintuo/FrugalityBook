@@ -10,13 +10,13 @@ const BookUnder5 = ({ data }) => {
     })
   })
   return (
-    <div style={{ backgroundColor: "rgba(242, 242, 240,0.2)", marginTop: '3vh' }}>
+    <div style={{ backgroundColor: "rgba(242, 242, 240,0.2)", marginTop: '15px' }}>
       <Grid container>
         <Grid item xs={12}>
           <div id="under5">
             <div style={{ textAlign: "center" }}>
               <Typography
-                style={{ display: "inline-block", marginRight: "4px" }}
+                style={{ display: "inline-block", marginRight: "4px" ,   fontSize: "30px", }}
                 variant="h5"
               >
                 Book
@@ -27,12 +27,13 @@ const BookUnder5 = ({ data }) => {
                   display: "inline-block",
                   marginRight: "4px",
                   color: "#00bdd7",
+                  fontSize: "30px",
                 }}
               >
                 Under 5$
               </Typography>
             </div>
-            <div style={{ textAlign: "center" }}>
+            <div style={{ textAlign: "center" ,marginTop:"10px" }}>
               <Typography variant="subtitle1">
                 Our website has alot of books that come from different school
                 that you can buy or sell as well.
@@ -54,6 +55,7 @@ const BookUnder5 = ({ data }) => {
                 color: "#5ae0f7",
                 borderColor: "#5ae0f7",
                 width: "40%",
+                marginTop:"20px",
               }}
             >
               SEE MORE
