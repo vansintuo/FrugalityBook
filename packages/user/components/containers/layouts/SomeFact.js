@@ -12,9 +12,8 @@ const SomeFact = () => {
   const imge = "../../assets/fact.jpg";
   const img = "../../assets/fact1.jpg";
   const useStyles = makeStyles(theme => ({
-    root: {
-      with:'100%',
-      padding: theme.spacing(12, 4),
+    container: {
+      padding: theme.spacing(8, 0),
     },
     container1: {
       width: "100%",
@@ -49,10 +48,12 @@ const SomeFact = () => {
     },
     title: {
       color: 'white',
+      marginTop:'8px'
     },
     title1: {
       color: 'black',
       textAlign: 'center',
+      marginTop:'8px'
     },
     featureList: {
       color: 'white',
@@ -66,18 +67,17 @@ const SomeFact = () => {
 
   const classes = useStyles();
   return (
-    <Container component="section" maxWidth="xl" className={classes.root} >
-      <Grid container alignItems="stretch" spacing={isMatch?10:0}>
+    <div className={classes.container}>
+       <Grid container alignItems="stretch" spacing={isMatch?10:0}>
         <Grid item xs={12} sm={6} >
           <div className={classes.container1}>
             <div className={classes.backg}>
-              <Typography variant="h5" component="h3" className={classes.title1}>
+              <Typography variant="h6" component="h3" className={classes.title1}>
                   SOME<span style={{ color: "#00bdd7" }}>FACT</span>
               </Typography>
                 <p> Are you a students or graduation?</p>
-                <p style={{marginTop:'0', marginBottom:'0'}}>If you are !!</p>
-                <p  style={{marginTop:'0', marginBottom:'0'}}>Here is the right place for you, looking the academic textbooks.{" "}</p>
-              
+                <Typography>If you are !!</Typography>
+                <Typography>Here is the right place for you, looking the academic textbooks.{" "}</Typography>
               <div>
                 <Grid container alignItems="stretch">
                   <Grid item xs={4}>
@@ -91,7 +91,7 @@ const SomeFact = () => {
                   }}
                   />
                   <div style={{borderRight: "3px dotted green",}}>3,000</div>
-                  <div style={{borderRight: "3px dotted green",}}>SOLDOUT</div>
+                  <div style={{borderRight: "3px dotted green",fontSize:'14px'}}>SOLDOUT</div>
                   </Grid>
                   <Grid item xs={4}>
                   <VolunteerActivismOutlined
@@ -103,7 +103,7 @@ const SomeFact = () => {
                     
                   }}/>
                   <div style={{borderRight: "3px dotted green",}}>3,000</div>
-                  <div style={{borderRight: "3px dotted green",}}>DONATE</div>
+                  <div style={{borderRight: "3px dotted green",fontSize:'14px'}}>DONATE</div>
                   </Grid>
                   <Grid item xs={4}>
                   <PersonPinCircleOutlined
@@ -117,7 +117,7 @@ const SomeFact = () => {
                   
                   />
                   <div>3,000</div>
-                  <div>USERS</div>
+                  <div style={{fontSize:'14px'}}>USERS</div>
                   </Grid>
 
                 </Grid>
@@ -129,7 +129,7 @@ const SomeFact = () => {
         <Grid item xs={12} sm={6} >
           <div className={classes.container2}>
             <div className={classes.child}>
-              <Typography variant="h5" component="h3" className={classes.title}>
+              <Typography variant="h6" component="h3" className={classes.title}>
                 OUR QUATATION
               </Typography>
               <h4>If you believe in yourself, nothing is impossible.</h4>
@@ -141,7 +141,7 @@ const SomeFact = () => {
           </div>
         </Grid>
       </Grid>
-    </Container>
+    </div>
   );
 };
 
