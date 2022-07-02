@@ -7,9 +7,6 @@ import DropDown from './DropDown';
 import Link from 'next/link';
 import { Avatar, Button } from '@mui/material';
 import SimpleButton from '../../presentations/buttons/SimpleButton';
-import SearchBarLayout from './../layouts/NewSearchBar';
-import Badges from '../../presentations/Badge';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import UserProfileCard from '../card/UserProfileCard';
 import { styled, useTheme } from '@mui/material/styles';
 import { useMediaQuery } from "@mui/material";
@@ -17,6 +14,7 @@ import { openSIState } from '../../../states/SignInSignUp';
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { Search } from '@mui/icons-material';
 import openSearch from '../../../states/openSearch';
+import Image from 'next/image';
 import NewSearchBar from './NewSearchBar';
 import Drawerv1 from './Drawerv1';
 const Navbar = ({ user }) => {
@@ -36,10 +34,10 @@ const Navbar = ({ user }) => {
                         <Link href='/'>
                                 <Typography
                                 sx={{ paddingRight: '30px', display: responsiveAndHoverSearch ? 'none' : '' }}>
-                                <img
+                                <Image
                                     width={80}
                                     height={40}
-                                    src="/assets/books/bookLogo.png"></img>
+                                    src="/assets/books/bookLogo.png"/>
                             </Typography>
                         </Link>
                             <Typography sx={{ display: responsiveAndHoverSearch ? 'none' : '', marginLeft: 'auto' }}><Drawerv1 user={user} /></Typography>

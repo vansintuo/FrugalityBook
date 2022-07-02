@@ -1,7 +1,15 @@
+
 import React from "react";
+import { makeStyles } from "@mui/styles";
 import { Grid, Typography, Button } from "@mui/material";
 import BookCard from "../../presentations/cards/BookCard";
 import { convertPathToURL } from "../../../utils/functions/data/convertPathToURL";
+const useStyle = makeStyles(theme => ({
+  container: {
+    padding: theme.spacing(4, 0),
+    backgroundColor: "rgba(242, 242, 240,0.2)"
+  },
+}))
 const NewArrival = ({ data }) => {
   const [dataBook, setDataBook] = React.useState([])
   React.useEffect(() => {
@@ -9,8 +17,9 @@ const NewArrival = ({ data }) => {
       setDataBook(res)
     })
   })
+  const classes = useStyle()
   return (
-    <div style={{ backgroundColor: "rgba(242, 242, 240,0.2)" }}>
+    <div className={classes.container}>
       <Grid container>
         <Grid item xs={12}>
           <div id="under5">
@@ -21,19 +30,21 @@ const NewArrival = ({ data }) => {
                   display: "inline-block",
                   marginRight: "4px",
                   color: "#00bdd7",
+                  fontSize: "30px",
                 }}
               >
                 New Arrival
               </Typography>
               <Typography
-                style={{ display: "inline-block", marginLeft: "4px" }}
+                style={{ display: "inline-block", marginLeft: "4px" ,  fontSize: "30px",
+              }}
                 variant="h5"
               >
                 Book
               </Typography>
             </div>
             <div style={{ textAlign: "center" }}>
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" style={{marginTop:"10px"}}>
                 Our website has alot of books that come from different school
                 that you can buy or sell as well.
               </Typography>
@@ -54,6 +65,7 @@ const NewArrival = ({ data }) => {
                 color: "#5ae0f7",
                 borderColor: "#5ae0f7",
                 width: "40%",
+                marginTop:"20px"
               }}
             >
               SEE MORE

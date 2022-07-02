@@ -3,12 +3,13 @@ import { useMediaQuery } from "@mui/material";
 import PropTypes from 'prop-types'
 import { Container, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
-const HelpDonate = () => {
+import { shadows } from "@mui/system";
+const HelpDonate = ({onClick}) => {
     const width600px = useMediaQuery('(max-width:900px)')
     const img = '../../assets/donateBgPic.jpg'
     const useStyle = makeStyles(theme => ({
-        root: {
-            padding: theme.spacing(4, 4),
+        container2: {
+            padding: theme.spacing(8, 0),
         },
         container: {
             backgroundImage: `url(${img})`,
@@ -26,20 +27,46 @@ const HelpDonate = () => {
 
         },
         title1:{
-            marginLeft:'40px'
+            marginLeft:'40px',
+            marginTop:'8px'
+             
         },
+        view:{
+            marginLeft: '30%',
+            width: '50%',
+            height: '7vh',
+            backgroundColor: "#00bdd7",
+            border: "1px solid #00bdd7",
+            "&:hover": {
+                cursor:"pointer",
+                color:'white',
+                boxShadow: "2px 2px",
+                boxShadow: "1px 1px 2px grey"
+              },
+        },
+        seeMore:{
+            marginLeft: '30%',
+            width: '50%',
+            height: '7vh',
+            border: "1px solid #00bdd7",
+            "&:hover": {
+                cursor:"pointer",
+                color: "#00bdd7",
+                boxShadow: "1px 1px 2px grey"
+              },
+
+        }
        
     }));
     const classes = useStyle()
     return (
-        <Container component="section" maxWidth="xl" className={classes.root}>
+        <div className={classes.container2}>
             <Grid spacing={0} container alignItems="stretch" >
                 <Grid item xs={12} sm={6}>
                     
                     <div className={classes.container}>   
                     
-                        </div>
-                        
+                        </div>         
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <div className={classes.container1}>
@@ -53,27 +80,12 @@ const HelpDonate = () => {
                          <div>
                     <Grid container>
                     <Grid item xs={6}>
-                        <button
-                            style={{
-                                marginLeft: '30%',
-                                width: '50%',
-                                height: '7vh',
-                                border: "1px solid #00bdd7",
-                            }}
-                        >
+                        <button onClick={onClick} className={classes.seeMore}>
                             SEE MORE
                         </button>
                     </Grid>
                     <Grid item xs={6}>
-                    <button
-                            style={{
-                                marginLeft: '30%',
-                                width: '50%',
-                                height: '7vh',
-                                backgroundColor: "#00bdd7",
-                                border: "1px solid #00bdd7",
-                            }}
-                        >
+                    <button onClick={onClick} className={classes.view}>
                             VIEW DETAIL
                         </button>
                     </Grid>
@@ -85,9 +97,8 @@ const HelpDonate = () => {
                 </Grid>
 
             </Grid>
-        </Container>
 
-
+        </div>
     );
 }
 

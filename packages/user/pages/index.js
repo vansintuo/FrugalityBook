@@ -1,6 +1,6 @@
 import CardWithoutContent from "../components/presentations/cards/CardWithoutContent";
 import { makeStyles } from "@mui/styles";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import HelpDonate from "../components/containers/layouts/HelpDonate";
 import SomeFact from "../components/containers/layouts/SomeFact";
 import Testimonail from "../components/containers/layouts/Testimonail";
@@ -28,21 +28,24 @@ const useStyle = makeStyles({
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    marginTop: "6%",
+    marginTop: "32px",
     "& span": {
       fontSize: "30px",
       color: "#00bdd7",
     },
     "& h3": {
       marginBottom: "0",
-      marginTop: "0",
+      marginTop: "10px",
     },
     "& p": {
-      marginBottom: "0",
-      marginTop: "0",
+      marginBottom: "2px",
+      // marginTop: "10px",
     },
   },
-  textArrival: {
+  Header:{
+    marginTop:"30px"
+  },
+  textArrival:{ 
     marginTop: "45px",
     height: "100px",
     position: "relative",
@@ -54,7 +57,7 @@ const useStyle = makeStyles({
       lineHeight: "30px",
     },
     "& p": {
-      marginTop: "-4%",
+      marginTop: "10px",
     },
   },
   seeMore: {
@@ -88,9 +91,6 @@ const useStyle = makeStyles({
     marginLeft: "5%",
     "& h3": {
       marginBottom: "-10px",
-    },
-    "& p": {
-      marginBottom: "25px",
     },
   },
 });
@@ -127,12 +127,12 @@ const Home = ({ user, dataProps }) => {
       <div className={classes.textMoreBook}>
         <span>1000+</span>
         <h3>BOOKS SELL IN OUR WEBSITE</h3>
-        <p>
+        <Typography style={{ marginTop: "20px",}}>
           Our website has alot of books that come from different school that you
           can buy or sell as well.
-        </p>
+        </Typography>
       </div>
-      <div >
+      <div className={classes.Header}>
         <Grid
           container
           spacing={3}
