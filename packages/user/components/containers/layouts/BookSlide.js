@@ -50,7 +50,6 @@ const BookSlide = () => {
     return (
       <div style={{ zIndex: "2" }} className={classes.next} onClick={onClick}>
         <p>
-          {" "}
           <ArrowRightIcon
             style={{
               marginTop: "-10px",
@@ -86,7 +85,6 @@ const BookSlide = () => {
     slidesToShow: 3,
     slidesToScroll: 3,
     initialSlide: 0,
-    // autoplay:true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     beforeChange: (current, next) => setImageIndex(next),

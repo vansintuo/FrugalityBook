@@ -4,18 +4,19 @@ import { Paper } from "@mui/material";
 const useStyle = makeStyles({
   bigContainer: {
     height: "180px",
-    width: "300px",
+    width: "90%",
     position: "relative",
   },
   container: {
-    width: "300px",
+    width: "100%",
     height: "160px",
     backgroundColor: "white",
-    position: "absolute",
+    position: "relative",
     paddingLeft: "25px",
     paddingRight: "15px",
     borderRadius: "5px",
     marginTop: "7%",
+    left: "5%",
   },
   headCard: {
     display: "flex",
@@ -56,7 +57,7 @@ const StudentSpeech = () => {
             }}
           />
           <div className={classes.name}>
-            <h3 style={{color:'#00bdd7'}}>Mr.JonhSon</h3>
+            <h3 style={{ color: "#00bdd7" }}>Mr.JonhSon</h3>
             <p>Takeo,Cambodia</p>
           </div>
         </div>

@@ -4,12 +4,13 @@ const Testimonail = () => {
   const img = "../../../../assets/mainBg.jpg";
   const useStyle = makeStyles({
     container: {
-      width: "auto",
+      width: "100%",
       height: "65vh",
       backgroundImage: `url(${img})`,
       backgroundRepeat: "no-repeat",
       position: "relative",
       marginTop: "5%",
+      left: "0",
     },
     subContainer: {
       position: "absolute",
@@ -29,11 +30,10 @@ const Testimonail = () => {
       position: "absolute",
       width: "100%",
       height: "50%",
-      backgroundColor: "rgba(0,0,0,0.6)",
+      backgroundColor: "rgba(0,0,0,0.7)",
+      left: "0",
     },
     slide: {
-      width: "100%",
-      position: "absolute",
       marginTop: "15vh",
       zIndex: "3",
     },
