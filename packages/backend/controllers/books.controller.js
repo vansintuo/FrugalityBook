@@ -20,7 +20,15 @@ const createBook = async (req, res) => {
   });
   const result = await book.save();
   const books = await db.books.find();
-  io.emit("book", books);
+  let data = [];
+  for (let i = 0; i < books.length; i++) {
+    if (books[i].userId == req.userId) {
+      data.push(books[i]);
+    }
+  }
+  if (data.length != 0) {
+    io.emit("book", data);
+  } else res.status(200).send({ message: "No Products!" });
   res.status(200).send({ message: "create success ", statusCode: 200 });
 };
 
@@ -65,7 +73,6 @@ const getBookSeller = async (req, res) => {
   }
   if (data.length != 0) {
     io.emit("book", data);
-    res.status(200).send({ data: data });
   } else res.status(200).send({ message: "No Products!" });
 };
 // :::::::::::::::::::::::::::::::::::::::::::::: update book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -76,11 +83,20 @@ const updateBook = async (req, res) => {
   try {
     await db.books.findByIdAndUpdate(id, body);
     const books = await db.books.find();
-    io.emit("book", books);
-    res.status(200).send({
-      message: "update successful !",
-      statusCode: 200,
-    });
+    let data = [];
+    // check wheter how many books that match with user id
+    for (let i = 0; i < books.length; i++) {
+      if (books[i].userId == req.userId) {
+        data.push(books[i]);
+      }
+    }
+    if (data.length != 0) {
+      io.emit("book", data);
+      res.status(200).send({
+        message: "update successful !",
+        statusCode: 200,
+      });
+    } else res.status(200).send({ message: "No Products!" });
   } catch (error) {
     res.status(400).send({ error: error });
   }
@@ -93,7 +109,15 @@ const deleteBook = async (req, res) => {
   try {
     const response = await db.books.findOneAndDelete({ _id: param.id });
     const books = await db.books.find();
-    io.emit("book", books);
+    let data = [];
+    for (let i = 0; i < books.length; i++) {
+      if (books[i].userId == req.userId) {
+        data.push(books[i]);
+      }
+    }
+    if (data.length != 0) {
+      io.emit("book", data);
+    } else res.status(200).send({ message: "No Products!" });
     res.status(200).send({
       message: "delete successful !",
       statusCode: 200,

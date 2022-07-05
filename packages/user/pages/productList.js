@@ -33,32 +33,26 @@ const useStyle = makeStyles({
   },
 });
 
-export async function getServerSideProps(ctx) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
-  console.log("res :::::::>>>", res);
-  const data = await res.json();
-  return {
-    props: {
-      data,
-    },
-  };
-}
-const ProductList = ({ user, data }) => {
+const ProductList = ({ user }) => {
   const classes = useStyle();
   // set states
-  const [products, setProducts] = React.useState(data.data);
-  const [finalProducts, setFinalProducts] = React.useState(data.data);
+  const [products, setProducts] = React.useState();
   const [openDelete, setOpenDelete] = React.useState(false);
   const [dataDelete, setDataDelete] = React.useState([]);
   const [dataUpdate, setDataUpdate] = React.useState();
   const [editState, setEditState] = useRecoilState(updateState);
   const socket = useSocket(process.env.NEXT_PUBLIC_BASE_URL); //TODO
-
-  React.useEffect(() => {
-    convertPathToURL(data?.data).then((res) => {
+  let data = [];
+  React.useEffect(async () => {
+    console.log("called");
+    const res = await fetcher(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/seller`
+    );
+    console.log("res product list ::::", res);
+    convertPathToURL(res.data).then((res) => {
       setProducts(res);
     });
-  }, [data]);
+  }, []);
   React.useEffect(() => {
     // catch data from socket and put to function to display real time
     if (socket) {
@@ -102,7 +96,8 @@ const ProductList = ({ user, data }) => {
   return (
     <Box>
       <Paper elevation={1} className={classes.subContainer}>
-        {products.length == 0 ? (
+        {console.log("products :::", products)}
+        {products?.length == 0 || products === undefined ? (
           <h3>Loading...</h3>
         ) : (
           <h3 style={{ marginBottom: 0 }}>
