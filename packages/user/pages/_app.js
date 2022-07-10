@@ -78,7 +78,7 @@ function MyApp({ Component, pageProps, token }) {
 MyApp.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};
   let authorize = {};
-  const token = parseCookies(ctx)?.user_token;
+  const token = parseCookies(ctx)?.seller_token;
   const publicRoutes =
     ctx.pathname === "/productDetail/[id]" ||
     ctx.pathname === "/bookCategories/[category]" ||
@@ -103,7 +103,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
     try {
       authorize = JSON.parse(token);
     } catch (error) {
-      destroyCookie(ctx, "user_token");
+      destroyCookie(ctx, "seller_token");
       redirectUser("/");
     }
   }
@@ -127,7 +127,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
     }
     pageProps.user = user;
   } catch (error) {
-    destroyCookie(ctx, "user_token");
+    destroyCookie(ctx, "seller_token");
     redirectUser("/");
   }
   return { pageProps, token };

@@ -4,7 +4,6 @@ const io = require("../server");
 // ::::::::::::::::::::::::::::::::::::::::::::: create book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 const createBook = async (req, res) => {
-  console.log("req::::", req);
   const body = req.body;
   const book = new db.books({
     title: body.title,
@@ -27,9 +26,11 @@ const createBook = async (req, res) => {
     }
   }
   if (data.length != 0) {
+    res
+      .status(200)
+      .send({ data: data, statusCode: 200, message: "create success" });
     io.emit("book", data);
-  } else res.status(200).send({ message: "No Products!" });
-  res.status(200).send({ message: "create success ", statusCode: 200 });
+  } else res.status(200).send({ data: [] });
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::: get book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -64,16 +65,12 @@ const getBook = async (req, res) => {
 };
 //:::::::::::::::::::::::get book for seller :::::::::::::::::
 const getBookSeller = async (req, res) => {
-  const books = await db.books.find();
-  let data = [];
-  for (let i = 0; i < books.length; i++) {
-    if (books[i].userId == req.userId) {
-      data.push(books[i]);
-    }
-  }
-  if (data.length != 0) {
-    io.emit("book", data);
-  } else res.status(200).send({ message: "No Products!" });
+  //method find data that match one amount value in array "$all:[array]"
+  const books = await db.books.find({ userId: { $all: [req.userId] } });
+  if (books.length != 0) {
+    res.status(200).send({ data: books });
+    io.emit("book", books);
+  } else res.status(200).send({ data: [] });
 };
 // :::::::::::::::::::::::::::::::::::::::::::::: update book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -82,23 +79,14 @@ const updateBook = async (req, res) => {
   const body = req.body;
   try {
     await db.books.findByIdAndUpdate(id, body);
-    const books = await db.books.find();
-    let data = [];
-    // check wheter how many books that match with user id
-    for (let i = 0; i < books.length; i++) {
-      if (books[i].userId == req.userId) {
-        data.push(books[i]);
-      }
-    }
-    if (data.length != 0) {
-      io.emit("book", data);
-      res.status(200).send({
-        message: "update successful !",
-        statusCode: 200,
-      });
-    } else res.status(200).send({ message: "No Products!" });
-  } catch (error) {
-    res.status(400).send({ error: error });
+    const books = await db.books.find({ userId: { $all: [req.userId] } });
+    res.status(200).send({
+      message: "update successful !",
+      statusCode: 200,
+    });
+    io.emit("book", books);
+  } catch (err) {
+    res.status(500).send({ error: err || "error accur!" });
   }
 };
 
@@ -107,19 +95,12 @@ const updateBook = async (req, res) => {
 const deleteBook = async (req, res) => {
   const param = req.params;
   try {
-    const response = await db.books.findOneAndDelete({ _id: param.id });
-    const books = await db.books.find();
-    let data = [];
-    for (let i = 0; i < books.length; i++) {
-      if (books[i].userId == req.userId) {
-        data.push(books[i]);
-      }
-    }
-    if (data.length != 0) {
-      io.emit("book", data);
-    } else res.status(200).send({ message: "No Products!" });
+    await db.books.findOneAndDelete({ _id: param.id });
+    const books = await db.books.find({ userId: { $all: [req.userId] } });
+    console.log("books ::::::", books);
+    io.emit("book", books);
     res.status(200).send({
-      message: "delete successful !",
+      message: "deleted successful !",
       statusCode: 200,
     });
   } catch (error) {

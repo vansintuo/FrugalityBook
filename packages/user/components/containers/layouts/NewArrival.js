@@ -1,26 +1,25 @@
-
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Grid, Typography, Button } from "@mui/material";
 import BookCard from "../../presentations/cards/BookCard";
 import { convertPathToURL } from "../../../utils/functions/data/convertPathToURL";
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(4, 0),
-    backgroundColor: "rgba(242, 242, 240,0.2)"
+    backgroundColor: "rgba(242, 242, 240,0.2)",
   },
-}))
+}));
 const NewArrival = ({ data }) => {
-  const [dataBook, setDataBook] = React.useState([])
+  const [dataBook, setDataBook] = React.useState([]);
   React.useEffect(() => {
     convertPathToURL(data?.data).then((res) => {
-      setDataBook(res)
-    })
-  })
-  const classes = useStyle()
+      setDataBook(res);
+    });
+  });
+  const classes = useStyle();
   return (
     <div className={classes.container}>
-      <Grid container>
+      <Grid container style={{ marginBottom: "50px" }}>
         <Grid item xs={12}>
           <div id="under5">
             <div style={{ textAlign: "center" }}>
@@ -36,15 +35,18 @@ const NewArrival = ({ data }) => {
                 New Arrival
               </Typography>
               <Typography
-                style={{ display: "inline-block", marginLeft: "4px" ,  fontSize: "30px",
-              }}
+                style={{
+                  display: "inline-block",
+                  marginLeft: "4px",
+                  fontSize: "30px",
+                }}
                 variant="h5"
               >
                 Book
               </Typography>
             </div>
             <div style={{ textAlign: "center" }}>
-              <Typography variant="subtitle1" style={{marginTop:"10px"}}>
+              <Typography variant="subtitle1">
                 Our website has alot of books that come from different school
                 that you can buy or sell as well.
               </Typography>
@@ -65,7 +67,7 @@ const NewArrival = ({ data }) => {
                 color: "#5ae0f7",
                 borderColor: "#5ae0f7",
                 width: "40%",
-                marginTop:"20px"
+                marginTop: "20px",
               }}
             >
               SEE MORE
@@ -77,17 +79,19 @@ const NewArrival = ({ data }) => {
         <Grid container rowSpacing={2}>
           {dataBook.map((item, index) => {
             if (index <= 2) {
-              return <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <BookCard 
-                  title={item.title}
-                  src={item.link}
-                  description={item.desc}
-                  price={item.price}
-                  href={`/productDetail/${item._id}`}
-                  />
-                </div>
-              </Grid>
+              return (
+                <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <BookCard
+                      title={item.title}
+                      src={item.link}
+                      description={item.desc}
+                      price={item.price}
+                      href={`/productDetail/${item._id}`}
+                    />
+                  </div>
+                </Grid>
+              );
             }
           })}
         </Grid>

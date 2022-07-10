@@ -1,12 +1,12 @@
 const db = require("./../models");
-const bcrypt = require('bcryptjs')
-const validator = require('validator')
-const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs");
+const validator = require("validator");
+const jwt = require("jsonwebtoken");
 //************************* Create Users *************************/
 //****************************************************************/
 const signUp = async (req, res) => {
-  const {fullname,email,role,password} = req.body;
-  body = req.body
+  const { fullname, email, role, password } = req.body;
+  body = req.body;
   // check whether user input their data or not
   if (Object.keys(body) == 0) {
     res.status(400).send({
@@ -15,34 +15,36 @@ const signUp = async (req, res) => {
     });
   }
   // check format of email
-  const isEmail = validator.isEmail(email)
-  if(!isEmail){
-    res.status(400).send({error:'Email is wrong format!'})
+  const isEmail = validator.isEmail(email);
+  if (!isEmail) {
+    res.status(400).send({ error: "Email is wrong format!" });
   }
   // check length of password
-  if(password.length<6 || password.length>8){
-    res.status(400).send({error:'password is required from 6-8 digit!'})
+  if (password.length < 6 || password.length > 8) {
+    res.status(400).send({ error: "password is required from 6-8 digit!" });
   }
-  
+
   try {
-  const isUser = await db.users.findOne({email: email})
-  // user has in system or not
-  if(isUser){
-    return res.status(401).send({error:'This email is already in used.'})
-  }
-  const user = new db.users({
-    fullname,
-    email,
-    role,
-    password:bcrypt.hashSync(password,8)
-   });
-   // create user
-   const data = await user.save()
-   return res.status(200).send({data:data , message:'create success', statusCode: 200})
-   // handle error
+    const isUser = await db.users.findOne({ email: email });
+    // user has in system or not
+    if (isUser) {
+      return res.status(401).send({ error: "This email is already in used." });
+    }
+    const user = new db.users({
+      fullname,
+      email,
+      role,
+      password: bcrypt.hashSync(password, 8),
+    });
+    // create user
+    const data = await user.save();
+    return res
+      .status(200)
+      .send({ data: data, message: "create success", statusCode: 200 });
+    // handle error
   } catch (error) {
     res.status(500).send({
-      error: error.message || 'error occured',
+      error: error.message || "error occured",
       statusCode: 500,
     });
     throw error;
@@ -80,40 +82,44 @@ const getUser = async (req, res) => {
         total: total,
       });
     } else if (page) {
-      // define how many data display and number of pages 
+      // define how many data display and number of pages
       const user = await db.users
         .find()
         .skip((page - 1) * limit)
         .limit(limit)
-        .exec()
+        .exec();
       if (total % limit == 0) {
         pages = total / limit;
       } else {
         pages = parseInt(total / limit) + 1;
       }
-      // find previous page 
-      if(page != 1){
-        previousPage=`http://localhost:${process.env.PORT}/api/v1/users?page=${Number(page)-1}&limit=${limit}`
+      // find previous page
+      if (page != 1) {
+        previousPage = `http://localhost:${
+          process.env.PORT
+        }/api/v1/users?page=${Number(page) - 1}&limit=${limit}`;
       }
       // find next page
-      if(page<pages){
-        nextPage=`http://localhost:${process.env.PORT}/api/v1/users?page=${Number(page)+1}&limit=${limit}`
+      if (page < pages) {
+        nextPage = `http://localhost:${process.env.PORT}/api/v1/users?page=${
+          Number(page) + 1
+        }&limit=${limit}`;
       }
       // send data to users
       res.status(200).send({
-        data:user,
-        count:user.length,
-        total:total,
-        pages:pages,
-        message:'success',
-        statusCode:200,
-        nextPage:nextPage,
-        previousPage:previousPage,
-        firstPage:`http://localhost:${process.env.PORT}/api/v1/users?page=1&limit=${limit}`,
-        lastPage:`http://localhost:${process.env.PORT}/api/v1/users?page=${pages}&limit=${limit}`,
-
-      })
-    } else { // handle errors 
+        data: user,
+        count: user.length,
+        total: total,
+        pages: pages,
+        message: "success",
+        statusCode: 200,
+        nextPage: nextPage,
+        previousPage: previousPage,
+        firstPage: `http://localhost:${process.env.PORT}/api/v1/users?page=1&limit=${limit}`,
+        lastPage: `http://localhost:${process.env.PORT}/api/v1/users?page=${pages}&limit=${limit}`,
+      });
+    } else {
+      // handle errors
       const users = await db.users.find();
       res.status(200).send({
         data: users,
@@ -121,9 +127,10 @@ const getUser = async (req, res) => {
         total: total,
       });
     }
-  } catch (error) { // any errors
+  } catch (error) {
+    // any errors
     res.status(500).send({
-      console:"server Error",
+      console: "server Error",
       statusCode: 500,
       message: error.message,
     });
@@ -189,47 +196,51 @@ const deleteUser = async (req, res) => {
   }
 };
 // :::::::::::::::::::::: sign in :::::::::::::::::::::::::::::::
-const signIn = async(req,res)=>{
-    const {email,password}=req.body
-    if(Object.keys(req.body)==0){
-      return res.status(200).send({error:'Body is not empty data!'})
+const signIn = async (req, res) => {
+  const { email, password } = req.body;
+  if (Object.keys(req.body) == 0) {
+    return res.status(200).send({ error: "Body is not empty data!" });
+  }
+  try {
+    const user = await db.users.findOne({ email: email });
+    if (!user) {
+      return res
+        .status(401)
+        .send({ message: "Email is not in system! No user!" });
     }
-    try{
-      const user = await db.users.findOne({email:email})
-      if(!user){
-        return res.status(401).send({message:'Email is not in system! No user!'})
-      }
-      const isRigthPassword = bcrypt.compareSync(password,user.password)
-      if(!isRigthPassword){
-        return res.status(200).send({message:'password is not match!'})
-      }
-        const payload = {userId:user._id}
-        jwt.sign(payload,process.env.ONLINE_BOOKSTORE,{expiresIn:'30d'},(error,token)=>{
-        if(error){
-          return res.status(201).send({message:error})
+    const isRigthPassword = bcrypt.compareSync(password, user.password);
+    if (!isRigthPassword) {
+      return res.status(200).send({ message: "password is not match!" });
+    }
+    const payload = { userId: user._id };
+    jwt.sign(
+      payload,
+      process.env.ONLINE_BOOKSTORE,
+      { expiresIn: "30d" },
+      (error, token) => {
+        if (error) {
+          return res.status(201).send({ message: error });
         }
-        res.status(200).send({data:user,accessToken:token})
-      })
-    }catch(error){
-        res.status(400).send({error:error})
-    }
-}
+        res.status(200).send({ data: user, accessToken: token });
+      }
+    );
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+};
 //::::::::::::::: get current user ::::::::::::::::::::::
-const getCurrentUser = async(req, res) =>{
-    const userId = req.userId
-    // console.log('userId :::: ', userId)
-    if(!userId) 
-      res.status(401).send({message:'unauthorized'})
-    try{
-      const user = await db.users.findById(userId)
-      if(!user) 
-        res.status(401).send({message:'no user found'})
-      res.status(200).send({data:user})
-    }catch(error){
-      res.status(500).send({message:error || 'Internal server error'})
-    }
-   
-}
+const getCurrentUser = async (req, res) => {
+  const userId = req.userId;
+  console.log("userId :::: ", userId);
+  if (!userId) res.status(401).send({ message: "unauthorized" });
+  try {
+    const user = await db.users.findById(userId);
+    if (!user) res.status(401).send({ message: "no user found" });
+    res.status(200).send({ data: user });
+  } catch (error) {
+    res.status(500).send({ message: error || "Internal server error" });
+  }
+};
 module.exports = {
   signUp,
   getUser,

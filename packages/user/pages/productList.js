@@ -14,6 +14,7 @@ import useSocket from "../sockets/useSocket";
 import CardProduct from "../components/presentations/cards/CardProduct";
 import SimpleButton from "../components/presentations/buttons/SimpleButton";
 import fetcher from "../utils/functions/api/fetcher";
+import CenterItem from "../components/presentations/CenterItem";
 const useStyle = makeStyles({
   subContainer: {
     textAlign: "center",
@@ -36,30 +37,46 @@ const useStyle = makeStyles({
 const ProductList = ({ user }) => {
   const classes = useStyle();
   // set states
-  const [products, setProducts] = React.useState();
+  const [products, setProducts] = React.useState([]);
   const [openDelete, setOpenDelete] = React.useState(false);
   const [dataDelete, setDataDelete] = React.useState([]);
   const [dataUpdate, setDataUpdate] = React.useState();
   const [editState, setEditState] = useRecoilState(updateState);
+  //set state to handle product whether it return with value or empty array
+  const [haveData, setHaveData] = React.useState(true);
   const socket = useSocket(process.env.NEXT_PUBLIC_BASE_URL); //TODO
   let data = [];
+  //called fetcher function to fetch data from API
   React.useEffect(async () => {
-    console.log("called");
-    const res = await fetcher(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/seller`
+    fetcher(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/seller`).then(
+      (res) => {
+        if (res) {
+          if (res.data == 0) {
+            setHaveData(false);
+          } else {
+            setHaveData(true);
+            convertPathToURL(res.data).then((res) => {
+              setProducts(res);
+            });
+          }
+        }
+      }
     );
-    console.log("res product list ::::", res);
-    convertPathToURL(res.data).then((res) => {
-      setProducts(res);
-    });
   }, []);
   React.useEffect(() => {
-    // catch data from socket and put to function to display real time
+    //catch data from socket and put to function to display real time
     if (socket) {
       socket.on("book", async (data) => {
-        convertPathToURL(data).then((res) => {
-          setProducts(res);
-        });
+        console.log("data :::::::", data);
+        if (data.length == 0) {
+          setHaveData(false);
+          setProducts([]);
+        } else {
+          setHaveData(true);
+          convertPathToURL(data).then((res) => {
+            setProducts(res);
+          });
+        }
       });
     }
   }, [socket]);
@@ -71,10 +88,9 @@ const ProductList = ({ user }) => {
     setDataUpdate(item);
   }; // :::::::::::: delete data :::::::::::::::::::::::
   const handleDelete = (data) => {
-    deleteData(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/admin/books/${data._id}`
-    )
+    deleteData(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/${data._id}`)
       .then((res) => {
+        console.log("res::::", res);
         setOpenDelete(false);
         Toastify(res.statusCode, res.message);
       })
@@ -95,22 +111,29 @@ const ProductList = ({ user }) => {
   }
   return (
     <Box>
-      <Paper elevation={1} className={classes.subContainer}>
-        {console.log("products :::", products)}
-        {products?.length == 0 || products === undefined ? (
-          <h3>Loading...</h3>
-        ) : (
+      {products?.length == 0 && haveData ? (
+        <h3>Loading...</h3>
+      ) : products?.length == 0 && !haveData ? (
+        <div style={{ marginTop: "200px", position: "relative" }}>
+          <CenterItem label={"Your products list is empty !"} />
+        </div>
+      ) : (
+        <Paper elevation={1} className={classes.subContainer}>
           <h3 style={{ marginBottom: 0 }}>
+            {console.log("product :::::::", products, haveData)}
             Your Product List{" "}
             <p style={{ marginTop: 0, color: "#00bdd7" }}>
               ({products?.length} {products?.length >= 2 ? "items" : "item"})
             </p>
           </h3>
-        )}
-      </Paper>
+        </Paper>
+      )}
+
       <div style={{ width: "90%", margin: "0 auto" }}>
         <SimpleButton
-          label={"Sell More"}
+          label={
+            products?.length == 0 && !haveData ? "Start sell" : "Sell More"
+          }
           onClick={openSellMoreFunc}
           style={{
             borderRadius: "5px",

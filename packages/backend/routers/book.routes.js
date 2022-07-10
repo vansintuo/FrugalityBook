@@ -41,12 +41,12 @@ module.exports = (app) => {
   );
   app.put(
     "/api/v1/books/:id",
-    // [authJwt.verifyToken, authJwt.isSeller],
+    [authJwt.verifyToken, authJwt.isSeller],
     controller.updateBook
   );
   app.delete(
     "/api/v1/books/:id",
-    // [authJwt.verifyToken, authJwt.isSeller],
+    [authJwt.verifyToken, authJwt.isSeller],
     controller.deleteBook
   );
 };

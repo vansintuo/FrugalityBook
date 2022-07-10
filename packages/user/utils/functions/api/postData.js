@@ -1,5 +1,5 @@
 import jsCookie from "js-cookie";
-const token = jsCookie.get("user_token");
+const token = jsCookie.get("seller_token");
 
 const postData = async (url, body) => {
   const author = JSON.parse(token || {});
