@@ -4,38 +4,37 @@ const Testimonail = () => {
   const img = "../../../../assets/mainBg.jpg";
   const useStyle = makeStyles({
     container: {
-      width: "auto",
+      width: "100%",
       height: "65vh",
       backgroundImage: `url(${img})`,
-      backgroundRepeat: 'no-repeat',
+      backgroundRepeat: "no-repeat",
       position: "relative",
-      marginTop: '5%',
+      marginTop: "5%",
+      left: "0",
     },
     subContainer: {
       position: "absolute",
-      width: '100%',
+      width: "100%",
       top: "2%",
-      textAlign: 'center',
+      textAlign: "center",
       "& h2": {
         marginBottom: "0",
-        color: 'white',
+        color: "white",
       },
       "& span": {
         color: "white",
-        marginTop: '0',
+        marginTop: "0",
       },
     },
     subBg: {
-      position: 'absolute',
-      width: '100%',
-      height: '50%',
-      backgroundColor: 'rgba(0,0,0,0.6)',
+      position: "absolute",
+      width: "100%",
+      height: "50%",
+      backgroundColor: "rgba(0,0,0,0.7)",
+      left: "0",
     },
     slide: {
-      width: "100%",
-      position: "absolute",
       marginTop: "15vh",
-      left: "4%",
       zIndex: "3",
     },
   });
@@ -55,10 +54,9 @@ const Testimonail = () => {
         <div className={classes.slide}>
           <BookSlide />
         </div>
-
       </div>
     </div>
   );
 };
 
-export default Testimonail
+export default Testimonail;
