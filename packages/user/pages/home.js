@@ -108,11 +108,11 @@ export async function getServerSideProps(ctx) {
 const Home = ({ user, dataProps }) => {
   const [data, setData] = useState([]);
   const classes = useStyle();
-  const [userStateValue, setUserStateValue] = useRecoilState(userState)
+  const [userStateValue, setUserStateValue] = useRecoilState(userState);
   if (user) {
-    setUserStateValue(user)
+    setUserStateValue(user);
   }
- 
+
   // ::::::::::::: called function convertPathToURL ::::::::::::::::
   React.useEffect(() => {
     convertPathToURL(dataProps.data).then((res) => {
@@ -123,7 +123,7 @@ const Home = ({ user, dataProps }) => {
     <div className={classes.bigContainer}>
       <Navbar user={user} />
       <div style={{ width: "100%" }}>
-        <NewMainBg user={user}/>
+        <NewMainBg user={user} />
       </div>
       <div className={classes.textMoreBook}>
         <span>1000+</span>
@@ -133,29 +133,33 @@ const Home = ({ user, dataProps }) => {
           can buy or sell as well.
         </p>
       </div>
-      <div >
+      <div>
         <Grid
           container
           spacing={3}
-          alignItems= 'center'
-          justifyContent='space-around'
-          direction='row'
+          alignItems="center"
+          justifyContent="space-around"
+          direction="row"
         >
           <Grid item xs={12} lg={3} sm={6} md={3}>
-            <Paper elevation={0} style={{textAlign:'center'}}><CardWithoutContent 
-            src='https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg'/></Paper>
+            <Paper elevation={0} style={{ textAlign: "center" }}>
+              <CardWithoutContent src="https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg" />
+            </Paper>
           </Grid>
           <Grid item xs={12} lg={3} sm={6} md={3}>
-            <Paper elevation={0} style={{textAlign:'center'}}><CardWithoutContent 
-            src='https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg'/></Paper>
+            <Paper elevation={0} style={{ textAlign: "center" }}>
+              <CardWithoutContent src="https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg" />
+            </Paper>
           </Grid>
           <Grid item xs={12} lg={3} sm={6} md={3}>
-            <Paper elevation={0} style={{textAlign:'center'}}><CardWithoutContent 
-            src='https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg'/></Paper>
+            <Paper elevation={0} style={{ textAlign: "center" }}>
+              <CardWithoutContent src="https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg" />
+            </Paper>
           </Grid>
           <Grid item xs={12} lg={3} sm={6} md={3}>
-            <Paper elevation={0} style={{textAlign:'center'}}><CardWithoutContent 
-            src='https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg'/></Paper>
+            <Paper elevation={0} style={{ textAlign: "center" }}>
+              <CardWithoutContent src="https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg" />
+            </Paper>
           </Grid>
         </Grid>
       </div>
@@ -163,19 +167,19 @@ const Home = ({ user, dataProps }) => {
         <SomeFact />
       </div>
       <div>
-      <NewArrival data={dataProps}/>
+        <NewArrival data={dataProps} />
       </div>
       <div>
         <HelpDonate />
       </div>
       <div>
-        <BestSeller data={dataProps}/>
+        <BestSeller data={dataProps} />
       </div>
       <div>
         <Testimonail />
       </div>
       <div>
-        <BookUnder5 data={dataProps}/>
+        <BookUnder5 data={dataProps} />
       </div>
     </div>
   );
