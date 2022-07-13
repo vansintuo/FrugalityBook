@@ -14,7 +14,8 @@ import { userState } from "../states/AuthGuardState/userState";
 import { useRecoilState } from "recoil";
 import BookUnder5 from "../components/containers/layouts/BookUnder5";
 import BestSeller from "../components/containers/layouts/BestSeller";
-
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 const useStyle = makeStyles({
   bigContainer: {
     position: "relative",
@@ -98,6 +99,7 @@ const useStyle = makeStyles({
 // ::::::::::::::::: use getServersideProps to get data (it's not loading) :::::::::::::::
 export async function getServerSideProps(ctx) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
+  
   const dataProps = await res.json();
   return {
     props: {
@@ -107,6 +109,8 @@ export async function getServerSideProps(ctx) {
 }
 const Home = ({ user, dataProps }) => {
   const [data, setData] = useState([]);
+  const theme = useTheme();
+  const Match = useMediaQuery(theme.breakpoints.down("md"))
   const classes = useStyle();
   const [userStateValue, setUserStateValue] = useRecoilState(userState);
   if (user) {
@@ -134,33 +138,46 @@ const Home = ({ user, dataProps }) => {
         </p>
       </div>
       <div>
-        <Grid
+      <Grid
           container
           spacing={3}
           alignItems="center"
           justifyContent="space-around"
           direction="row"
         >
-          <Grid item xs={12} lg={3} sm={6} md={3}>
-            <Paper elevation={0} style={{ textAlign: "center" }}>
-              <CardWithoutContent src="https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg" />
-            </Paper>
-          </Grid>
-          <Grid item xs={12} lg={3} sm={6} md={3}>
-            <Paper elevation={0} style={{ textAlign: "center" }}>
-              <CardWithoutContent src="https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg" />
-            </Paper>
-          </Grid>
-          <Grid item xs={12} lg={3} sm={6} md={3}>
-            <Paper elevation={0} style={{ textAlign: "center" }}>
-              <CardWithoutContent src="https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg" />
-            </Paper>
-          </Grid>
-          <Grid item xs={12} lg={3} sm={6} md={3}>
-            <Paper elevation={0} style={{ textAlign: "center" }}>
-              <CardWithoutContent src="https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg" />
-            </Paper>
-          </Grid>
+    
+          {Match ? (
+            <>
+              <Grid item xs={12} lg={3} sm={6} md={3}>
+                <Paper elevation={0} style={{ textAlign: "center" }}>
+                  <CardWithoutContent src="https://www.gannett-cdn.com/-mm-/22212976ebafcf5f2c30e55526085cc9f0cae3a2/c=85-0-424-339&r=x233&c=210x230/local/-/media/2017/05/25/Louisville/Louisville/636313252324286257-649149229.jpg" />
+                </Paper>
+              </Grid>
+            </>
+            ) : (
+            <>
+              <Grid item xs={12} lg={3} sm={6} md={3}>
+                <Paper elevation={0} style={{ textAlign: "center" }}>
+                  <CardWithoutContent src="https://i0.wp.com/northforker.com/files/2021/02/8E708912-4A5A-4183-B83D-5D6ED1F42496.jpeg?resize=640%2C633&ssl=1" />
+                </Paper>
+              </Grid>
+              <Grid item xs={12} lg={3} sm={6} md={3}>
+                <Paper elevation={0} style={{ textAlign: "center" }}>
+                  <CardWithoutContent src="https://neatplaces.co.nz/media/thumbs/uploads/places/place/dead_souls_bookshop/Dead_Souls_Bookshop_Dunedin_9.jpg.650x425_q80_crop-smart_upscale.jpg" />
+                </Paper>
+              </Grid>
+              <Grid item xs={12} lg={3} sm={6} md={3}>
+                <Paper elevation={0} style={{ textAlign: "center" }}>
+                  <CardWithoutContent src="https://i.pinimg.com/736x/58/f2/f6/58f2f61e1be6b900a5b0ceb32c48a417.jpg" />
+                </Paper>
+              </Grid>
+              <Grid item xs={12} lg={3} sm={6} md={3}>
+                <Paper elevation={0} style={{ textAlign: "center" }}>
+                  <CardWithoutContent src="https://i.pinimg.com/736x/58/f2/f6/58f2f61e1be6b900a5b0ceb32c48a417.jpg" />
+                </Paper>
+              </Grid>
+            </>
+          )}
         </Grid>
       </div>
       <div>
