@@ -1,6 +1,5 @@
-
 import { makeStyles } from "@mui/styles";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import { DialogContent, DialogTitle, Grid, Link } from "@mui/material";
 import { Button, Divider, TextField } from "@mui/material";
@@ -14,6 +13,8 @@ import unauthorFetch from "../utils/functions/api/unauthorFetch";
 import CheckoutButton from "../components/presentations/buttons/CheckoutButton";
 import CardProduct from "../components/presentations/cards/CardProduct";
 import SimpleButton from "../components/presentations/buttons/SimpleButton";
+import fetcher from "../utils/functions/api/fetcher";
+import { io } from "socket.io-client";
 const useStyle = makeStyles({
   container: {
     width: "80%",
@@ -102,69 +103,46 @@ const useStyle = makeStyles({
   },
 });
 const UsersBasket = () => {
-  const router = useRouter()
-  const socket = useSocket(process.env.NEXT_PUBLIC_BASE_URL)
+  const router = useRouter();
+  const socket = useSocket(process.env.NEXT_PUBLIC_BASE_URL);
   const classes = useStyle();
   const [products, setProducts] = React.useState([]);
   const [openDelete, setOpenDelete] = React.useState(false);
   const [openEdit, setOpenEdit] = React.useState(false);
   const [dataDelete, setDataDelete] = React.useState([]);
-  const [totalPrice, setTotalPrice] = React.useState(0)
-  const [data, setData] = React.useState([])
-  const [open, setOpen] = React.useState(false)
+  const [totalPrice, setTotalPrice] = React.useState(0);
+  const [data, setData] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
   React.useEffect(async () => {
-    let dataStore = []
-    const result = await unauthorFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/checkouts`)
-    if (result) {
-      for (let i = 0; i < result.data.length; i++) {
-        const data = await unauthorFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/${result.data[i].bookId[0]}`)
-        //push checkout Id and all data to store in one other model
-        data.data[0] && dataStore.push({ checkoutId: result.data[i]._id, ...data.data[0] })
-      }
-      dataStore !=[] && convertPathToURL(dataStore).then((res) => {
-        setProducts(res)
+    let dataStore = [];
+    await fetcher(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/checkouts`)
+      .then((res) => {
+        convertPathToURL(res.data).then((result) => {
+          console.log("res ::::::", result);
+          setProducts(result);
+        });
       })
-    }
-  }, [openDelete]);
+      .catch((error) => {
+        console.log("error:::", error);
+      });
+  }, []);
   React.useEffect(() => {
-    let total = 0
-    console.log('product ::::::::::', products)
-    for (let i = 0; i < products.length; i++) {
-      total = total + products[i].price
+    if (socket) {
+      socket.on("getCheckouts", async (data) => {
+        convertPathToURL(data).then((result) => {
+          console.log("res ::::::", result);
+          setProducts(result);
+        });
+      });
     }
-    if (total != 0) {
-      setTotalPrice(total)
-    }
-  }, [products])
-  // React.useEffect( async()=>{
-  //   let dataStore = []
-  //   let finalData = []
-  //   if(socket){
-  //       socket.on("getCheckouts", (element)=>{
-  //         console.log('element:::::::::::', element)
-  //         for(let i=0 ;i<element.length; i++){
-  //           dataStore.push(element[i])
-  //         }
-  //         setData(dataStore)
-  //       })
-  //       // get data via book id
-  //       console.log('data f ', data)
-  //       for (let i=0;i<data.length;i++){
-  //         const res = await unauthorFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/${data[i].bookId[0]}`)
-  //         convertPathToURL(res.data).then((result)=>{
-  //             finalData.push(result[0])
-  //         })
-  //       }
-  //     convertPathToURL(finalData).then((res)=>{
-  //         setProducts(res)
-  //     })
-  //   }
-  // },[socket])
+  }, [socket]);
   // :::::::::::: delete data :::::::::::::::::::::::
   const handleDelete = (data) => {
-    deleteData(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/checkouts/${data.checkoutId}`)
+    deleteData(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/checkouts/${data.checkoutId}`
+    )
       .then((res) => {
-        Toastify(res.statusCode, res.message)
+        Toastify(res.statusCode, res.message);
         setOpenDelete(false);
       })
       .catch((err) => {
@@ -177,9 +155,9 @@ const UsersBasket = () => {
     setDataDelete(data);
     setOpenDelete(true);
   };
-  // function sell more 
+  // function sell more
   function addMore() {
-    router.push("/home")
+    router.push("/home");
   }
   return (
     <div>
@@ -188,17 +166,25 @@ const UsersBasket = () => {
           <h3>Loading...</h3>
         ) : (
           <h3>
-            Your Product List <span style={{ color: '#00bdd7' }}>
-              ({products?.length}{" "}
-              {products?.length >= 2 ? "items" : "item"} = ${totalPrice} )
+            Your Baskets{" "}
+            <span style={{ color: "#00bdd7" }}>
+              ({products?.length} {products?.length >= 2 ? "items" : "item"} = $
+              {totalPrice} )
             </span>
           </h3>
         )}
       </Paper>
-      <div style={{ width: '80%', margin: '0 auto',}}>
-          <CheckoutButton
-            onClick={()=>router.push('https://www.facebook.com/FrugalityBook-104791435445732')}
-            style={{ float: 'right', top: '2vh' }}>Checkout</CheckoutButton>
+      <div style={{ width: "80%", margin: "0 auto" }}>
+        <CheckoutButton
+          onClick={() =>
+            router.push(
+              "https://www.facebook.com/FrugalityBook-104791435445732"
+            )
+          }
+          style={{ float: "right", top: "2vh" }}
+        >
+          Checkout
+        </CheckoutButton>
         {/* <SimpleButton
           label={'Add More'}
           onClick={() => router.push('/')}
@@ -211,22 +197,24 @@ const UsersBasket = () => {
             }} /> */}
       </div>
       <div style={{ marginTop: "20px", marginBottom: "10px" }}>
+        {console.log("map:::::::", products)}
         <Grid container rowSpacing={2}>
           {products?.map((item, index) => {
-            return (<Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <CardProduct
-                  url={item.link}
-                  Desc={item.desc}
-                  Title={item.title}
-                  edit={false}
-                  Price={item.price}
-                  status={item.status}
-                  cat={item.category}
-                  onClickDelete={() => handleDeleteDialog(item)}
-                />
-              </div>
-            </Grid>
+            return (
+              <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <CardProduct
+                    url={item.link}
+                    Desc={item.desc}
+                    Title={item.title}
+                    edit={false}
+                    Price={item.price}
+                    status={item.status}
+                    cat={item.category}
+                    onClickDelete={() => handleDeleteDialog(item)}
+                  />
+                </div>
+              </Grid>
             );
           })}
         </Grid>
@@ -236,7 +224,9 @@ const UsersBasket = () => {
         <DialogTitle>Are you sure to delete this item?</DialogTitle>
         <div style={{ display: "flex", marginLeft: "135px" }}>
           <DialogActions>
-            <Button onClick={() => setOpenDelete(false)} color="error">No</Button>
+            <Button onClick={() => setOpenDelete(false)} color="error">
+              No
+            </Button>
             <Button onClick={() => handleDelete(dataDelete)}>Yes</Button>
           </DialogActions>
         </div>

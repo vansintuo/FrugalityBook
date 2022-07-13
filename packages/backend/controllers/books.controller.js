@@ -4,7 +4,8 @@ const io = require("../server");
 // ::::::::::::::::::::::::::::::::::::::::::::: create book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 const createBook = async (req, res) => {
-  const body = req.body;
+  const body = req?.body;
+  const userId = req.userId;
   const book = new db.books({
     title: body.title,
     price: body.price,
@@ -18,18 +19,15 @@ const createBook = async (req, res) => {
     category: body.category,
   });
   const result = await book.save();
-  const books = await db.books.find();
-  let data = [];
-  for (let i = 0; i < books.length; i++) {
-    if (books[i].userId == req.userId) {
-      data.push(books[i]);
-    }
-  }
-  if (data.length != 0) {
+  const books = await db.books.find({ userId: { $all: [req?.userId] } });
+  //catch bookid and put to user colletion at books attr
+  const bookId = result._id;
+  await db.users.updateOne({ _id: userId }, { $push: { books: bookId } });
+  if (books.length != 0) {
     res
       .status(200)
-      .send({ data: data, statusCode: 200, message: "create success" });
-    io.emit("book", data);
+      .send({ data: books, statusCode: 200, message: "create success" });
+    io.emit("book", books);
   } else res.status(200).send({ data: [] });
 };
 
@@ -94,10 +92,13 @@ const updateBook = async (req, res) => {
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 const deleteBook = async (req, res) => {
   const param = req.params;
+  const userId = req.userId;
   try {
-    await db.books.findOneAndDelete({ _id: param.id });
-    const books = await db.books.find({ userId: { $all: [req.userId] } });
-    console.log("books ::::::", books);
+    const result = await db.books.findOneAndDelete({ _id: param.id });
+    const books = await db.books.find({ userId: { $all: [userId] } });
+    //delete from books collection and from users.books as well
+    const bookId = result._id;
+    await db.users.updateOne({ _id: userId }, { $pull: { books: bookId } });
     io.emit("book", books);
     res.status(200).send({
       message: "deleted successful !",
