@@ -30,7 +30,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
-    "firebase": "^7.20.0",
+    "firebase": "^8.10.0",
     "js-cookie": "^3.0.1",
     "maplibre-gl": "^1.15.2",
     "material-ui-popup-state": "^2.0.0",
