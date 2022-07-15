@@ -14,7 +14,6 @@ import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { Dialog } from "@mui/material";
 import { useRouter } from "next/router";
-import firebase from "../../../services/firebase-config";
 import { openSUState, openSIState } from "../../../states/SignInSignUp";
 import { useRecoilState } from "recoil";
 import { signUp } from "../../../utils/functions/auth/authUser";
@@ -69,25 +68,6 @@ const SignUPDialog = () => {
   const [type1, setType1] = React.useState("password");
   const [userRole, setUserRole] = React.useState("user");
   const classes = useStyles();
-  // :::::::::::::::::::: sing up with google and password ::::::::::::::::::::::::
-  const socialMediaAuth = (provider) => {
-    return firebase
-      .auth()
-      .signInWithPopup(facebookProvider)
-      .then((res) => {
-        setOpenSU(false);
-        return res.user;
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
-  const facebookProvider = new firebase.auth.FacebookAuthProvider();
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
-  const handleOnClick = (provider) => {
-    const res = socialMediaAuth(provider);
-    console.log(res);
-  };
 
   // :::::::::::::::::::::::::::: create user ::::::::::::::::::::::::::::::::::
   const handleCreateUser = async (event) => {
