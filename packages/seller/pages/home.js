@@ -14,8 +14,8 @@ import { userState } from "../states/AuthGuardState/userState";
 import { useRecoilState } from "recoil";
 import BookUnder5 from "../components/containers/layouts/BookUnder5";
 import BestSeller from "../components/containers/layouts/BestSeller";
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 const useStyle = makeStyles({
   bigContainer: {
     position: "relative",
@@ -99,7 +99,7 @@ const useStyle = makeStyles({
 // ::::::::::::::::: use getServersideProps to get data (it's not loading) :::::::::::::::
 export async function getServerSideProps(ctx) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
-  
+
   const dataProps = await res.json();
   return {
     props: {
@@ -110,7 +110,7 @@ export async function getServerSideProps(ctx) {
 const Home = ({ user, dataProps }) => {
   const [data, setData] = useState([]);
   const theme = useTheme();
-  const Match = useMediaQuery(theme.breakpoints.down("md"))
+  const Match = useMediaQuery(theme.breakpoints.down("md"));
   const classes = useStyle();
   const [userStateValue, setUserStateValue] = useRecoilState(userState);
   if (user) {
@@ -138,14 +138,13 @@ const Home = ({ user, dataProps }) => {
         </p>
       </div>
       <div>
-      <Grid
+        <Grid
           container
           spacing={3}
           alignItems="center"
           justifyContent="space-around"
           direction="row"
         >
-    
           {Match ? (
             <>
               <Grid item xs={12} lg={3} sm={6} md={3}>
@@ -154,7 +153,7 @@ const Home = ({ user, dataProps }) => {
                 </Paper>
               </Grid>
             </>
-            ) : (
+          ) : (
             <>
               <Grid item xs={12} lg={3} sm={6} md={3}>
                 <Paper elevation={0} style={{ textAlign: "center" }}>

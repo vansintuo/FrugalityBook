@@ -13,8 +13,8 @@ import { userState } from "../states/AuthGuardState/userState";
 import { useRecoilState } from "recoil";
 import BookUnder5 from "../components/containers/layouts/BookUnder5";
 import BestSeller from "../components/containers/layouts/BestSeller";
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 const useStyle = makeStyles({
   bigContainer: {
     position: "relative",
@@ -107,20 +107,21 @@ export async function getServerSideProps(ctx) {
 }
 const Home = ({ user, dataProps }) => {
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("md"))
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const [data, setData] = useState([]);
   const classes = useStyle();
   const [userStateValue, setUserStateValue] = useRecoilState(userState);
   if (user) {
     setUserStateValue(user);
   }
-  
 
   // ::::::::::::: called function convertPathToURL ::::::::::::::::
   React.useEffect(() => {
     console.log(`bruh ${isMatch}`);
     convertPathToURL(dataProps.data).then((res) => {
-      setData(res);
+      if (res) {
+        setData(res);
+      }
     });
   }, []);
   return (
@@ -145,7 +146,6 @@ const Home = ({ user, dataProps }) => {
           justifyContent="space-around"
           direction="row"
         >
-    
           {isMatch ? (
             <>
               <Grid item xs={12} lg={3} sm={6} md={3}>
@@ -154,7 +154,7 @@ const Home = ({ user, dataProps }) => {
                 </Paper>
               </Grid>
             </>
-            ) : (
+          ) : (
             <>
               <Grid item xs={12} lg={3} sm={6} md={3}>
                 <Paper elevation={0} style={{ textAlign: "center" }}>
@@ -195,9 +195,7 @@ const Home = ({ user, dataProps }) => {
       <div>
         <Testimonail />
       </div>
-      <div>
-        <BookUnder5 data={dataProps} />
-      </div>
+      <div>{/* <BookUnder5 data={dataProps} /> */}</div>
     </div>
   );
 };

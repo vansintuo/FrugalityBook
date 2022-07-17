@@ -15,7 +15,7 @@ const NewArrival = ({ data }) => {
     convertPathToURL(data?.data).then((res) => {
       setDataBook(res);
     });
-  });
+  }, []);
   const classes = useStyle();
   return (
     <div className={classes.container}>
