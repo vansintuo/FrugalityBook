@@ -11,7 +11,6 @@ const firebaseConfig = {
   storageBucket: "frugalitybookv1-13c25.appspot.com",
   messagingSenderId: "232059972430",
   appId: "1:232059972430:web:a095ed8de9b0b17b6dcc1f",
-  measurementId: "G-DDDVMXQ23V",
 };
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
