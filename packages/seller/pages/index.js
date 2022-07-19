@@ -195,7 +195,9 @@ const Home = ({ user, dataProps }) => {
       <div>
         <Testimonail />
       </div>
-      <div>{/* <BookUnder5 data={dataProps} /> */}</div>
+      <div>
+        <BookUnder5 data={dataProps} />
+      </div>
     </div>
   );
 };
