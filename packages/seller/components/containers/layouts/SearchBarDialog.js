@@ -3,7 +3,7 @@ import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import SearchIcon from "@mui/icons-material/Search";
 
-const searchBarDialog = () => {
+const SearchBarDialog = () => {
   const theme = useTheme();
   const fullscreen = useMediaQuery(theme.breakpoints.down("sm"));
   const styles = makeStyles({
