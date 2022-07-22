@@ -38,10 +38,13 @@ const signIn = async (email, password, setError, setLoading) => {
   setLoading(false);
   setError(null);
   try {
-    const res = await axios.post(`http://localhost:5555/api/v1/author/signIn`, {
-      email,
-      password,
-    });
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/author/signIn`,
+      {
+        email,
+        password,
+      }
+    );
     setLoading(true);
     setError("");
     if (res.data.message) {
