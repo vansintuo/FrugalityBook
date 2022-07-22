@@ -96,16 +96,16 @@ const useStyle = makeStyles({
   },
 });
 // ::::::::::::::::: use getServersideProps to get data (it's not loading) :::::::::::::::
-// export async function getServerSideProps(ctx) {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
-//   const dataProps = await res.json();
-//   return {
-//     props: {
-//       dataProps,
-//     },
-//   };
-// }
-const Home = ({ user }) => {
+export async function getServerSideProps(ctx) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
+  const dataProps = await res.json();
+  return {
+    props: {
+      dataProps,
+    },
+  };
+}
+const Home = ({ user, dataProps }) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const [data, setData] = useState([]);
@@ -116,14 +116,14 @@ const Home = ({ user }) => {
   }
 
   // ::::::::::::: called function convertPathToURL ::::::::::::::::
-  // React.useEffect(() => {
-  //   console.log(`bruh ${isMatch}`);
-  //   convertPathToURL(dataProps.data).then((res) => {
-  //     if (res) {
-  //       setData(res);
-  //     }
-  //   });
-  // }, []);
+  React.useEffect(() => {
+    console.log(`bruh ${isMatch}`);
+    convertPathToURL(dataProps.data).then((res) => {
+      if (res) {
+        setData(res);
+      }
+    });
+  }, []);
   return (
     <div className={classes.bigContainer}>
       <Navbar user={user} />
@@ -183,15 +183,21 @@ const Home = ({ user }) => {
       <div>
         <SomeFact />
       </div>
-      <div>{/* <NewArrival data={dataProps} /> */}</div>
+      <div>
+        <NewArrival data={dataProps} />
+      </div>
       <div>
         <HelpDonate />
       </div>
-      <div>{/* <BestSeller data={dataProps} /> */}</div>
+      <div>
+        <BestSeller data={dataProps} />
+      </div>
       <div>
         <Testimonail />
       </div>
-      <div>{/* <BookUnder5 data={dataProps} /> */}</div>
+      <div>
+        <BookUnder5 data={dataProps} />
+      </div>
     </div>
   );
 };

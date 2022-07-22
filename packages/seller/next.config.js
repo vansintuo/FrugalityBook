@@ -9,8 +9,11 @@ module.exports = {
       "i.pinimg.com",
       "encrypted-tbn0.gstatic.com",
       "static.wikia.nocookie.net",
-      "firebasestorage.googleapis.com"
+      "firebasestorage.googleapis.com",
     ],
+  },
+  env: {
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
   reactStrictMode: true,
 };
