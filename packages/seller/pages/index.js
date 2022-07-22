@@ -15,6 +15,7 @@ import BookUnder5 from "../components/containers/layouts/BookUnder5";
 import BestSeller from "../components/containers/layouts/BestSeller";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import unauthorFetch from "../utils/functions/api/unauthorFetch";
 const useStyle = makeStyles({
   bigContainer: {
     position: "relative",
@@ -96,15 +97,15 @@ const useStyle = makeStyles({
   },
 });
 // ::::::::::::::::: use getServersideProps to get data (it's not loading) :::::::::::::::
-export async function getServerSideProps(ctx) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
-  const dataProps = await res.json();
-  return {
-    props: {
-      dataProps,
-    },
-  };
-}
+// export async function getServerSideProps(ctx) {
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
+//   const dataProps = await res.json();
+//   return {
+//     props: {
+//       dataProps,
+//     },
+//   };
+// }
 const Home = ({ user, dataProps }) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -117,12 +118,14 @@ const Home = ({ user, dataProps }) => {
 
   // ::::::::::::: called function convertPathToURL ::::::::::::::::
   React.useEffect(() => {
-    console.log(`bruh ${isMatch}`);
-    convertPathToURL(dataProps.data).then((res) => {
-      if (res) {
-        setData(res);
+    console.log("data :::::::::;");
+    unauthorFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`).then(
+      (res) => {
+        if (res) {
+          setData(res);
+        }
       }
-    });
+    );
   }, []);
   return (
     <div className={classes.bigContainer}>
@@ -184,19 +187,19 @@ const Home = ({ user, dataProps }) => {
         <SomeFact />
       </div>
       <div>
-        <NewArrival data={dataProps} />
+        <NewArrival data={data} />
       </div>
       <div>
         <HelpDonate />
       </div>
       <div>
-        <BestSeller data={dataProps} />
+        <BestSeller data={data} />
       </div>
       <div>
         <Testimonail />
       </div>
       <div>
-        <BookUnder5 data={dataProps} />
+        <BookUnder5 data={data} />
       </div>
     </div>
   );
