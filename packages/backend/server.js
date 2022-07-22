@@ -12,7 +12,11 @@ const dotenv = require("dotenv");
 const app = express();
 // access block by cors
 const cors = require("cors");
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 // using socket.io
 const http = require("http");
 const server = http.createServer(app);

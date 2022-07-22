@@ -8,10 +8,10 @@ import { Button } from "@mui/material";
 // import emailjs from "emailjs-com";
 export default function Contact() {
   const [loading, setLoading] = React.useState(false);
- 
+  console.log(`URL: ::::${process.env.NEXT_PUBLIC_BASE_URL}`);
   function handleSendEmail(e) {
     e.preventDefault();
-    console.log(e.target)
+    console.log(e.target);
     setLoading(true);
     emailjs
       .sendForm(
@@ -51,7 +51,7 @@ export default function Contact() {
             Full up this the form our team get back to you within 24 hours.We
             happy to hepls you and don&apos;t be shy drop your problem here.
           </Typography>
-          <form  onSubmit={handleSendEmail}>
+          <form onSubmit={handleSendEmail}>
             <Grid container spacing={1}>
               <Grid xs={12} sm={6} item>
                 <TextField
@@ -114,7 +114,7 @@ export default function Contact() {
 
               <Grid xs={12} item>
                 <Button
-                    style={{backgroundColor:'#00bdd7'}}
+                  style={{ backgroundColor: "#00bdd7" }}
                   type="submit"
                   variant="contained"
                   fullWidth
