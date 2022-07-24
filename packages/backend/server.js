@@ -49,6 +49,9 @@ io.on("connection", (socket) => {
 });
 module.exports = io;
 // calling rout from route files
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
 require("./routers/book.routes")(app);
 require("./routers/user.routes")(app);
 require("./routers/category.routes")(app);
