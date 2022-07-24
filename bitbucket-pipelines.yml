@@ -22,4 +22,4 @@ pipelines:
           - git config --global user.name "Phirun Oem"
           - git add .
           - git commit -m "deploy latest update"
-          - git push -f https://heroku:43188057-4083-4a4b-a59d-2b517e38ad96@git.heroku.com/frugalitybook.git HEAD:master
+          - git push -f https://heroku:7f710994-d441-4e59-9356-550059fc46ed@git.heroku.com/frugalitybook.git HEAD:master
