@@ -8,8 +8,8 @@ pipelines:
           - node
         script:
           - cd packages/backend
-          - yarn install
-          - yarn run test
+          - npm install
+          - npm run test
     - step:
         name: "deploy to heroku"
         caches:
