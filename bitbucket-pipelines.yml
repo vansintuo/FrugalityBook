@@ -2,27 +2,23 @@ image: atlassian/default-image:3
 
 pipelines:
   default:
-    - parallel:
-        - step:
-            name: "Build and Test"
-            script:
-              - echo "Your build and test goes here..."
-        - step:
-            name: "Lint"
-            script:
-              - echo "Your linting goes here..."
-        - step:
-            name: "Security scan"
-            script:
-              - echo "Your security scan goes here..."
     - step:
-        name: "Deployment to Staging"
-        deployment: staging
+        name: "testing on server"
+        caches:
+          - node
         script:
-          - echo "Your deployment to staging script goes here..."
+          - cd packages/backend
+          - yarn install
+          - yarn run test
     - step:
-        name: "Deployment to Production"
-        deployment: production
-        trigger: "manual"
+        name: "deploy to heroku"
+        caches:
+          - node
         script:
-          - echo "Your deployment to production script goes here..."
+          - cd packages/backend
+          - git init
+          - git config --global user.email "phirunoemark123@gmail.com"
+          - git config --global user.name "Phirun Oem"
+          - git add .
+          - git commit -m "deploy latest update"
+          - git push -f https://heroku:43188057-4083-4a4b-a59d-2b517e38ad96@git.heroku.com/frugalitybook.git HEAD:master
