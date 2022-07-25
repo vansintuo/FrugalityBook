@@ -1,61 +1,61 @@
 const db = require("../models");
-const io = require('./../server')
+const io = require("../Server");
 
 // :::::::::::::::::::::::::::::::::::::::::::::: create book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 const createCategory = async (req, res) => {
-  const cat = await db.categories.find()
-  io.emit("cat", cat )
+  const cat = await db.categories.find();
+  io.emit("cat", cat);
   const body = req.body;
   const categories = new db.categories({
-    category:body.category,
-    bookMatch:body.bookMatch,
+    category: body.category,
+    bookMatch: body.bookMatch,
   });
   await categories.save();
-  res.status(200).send({ message:'create success', statusCode: 200});
+  res.status(200).send({ message: "create success", statusCode: 200 });
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::: get book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 const getCategory = async (req, res) => {
-  const cat = await db.categories.find()
-  io.emit("cat", cat )
-  const param = req.params
+  const cat = await db.categories.find();
+  io.emit("cat", cat);
+  const param = req.params;
   const response = await db.categories.find();
-  res.status(200).send({ data: response});
+  res.status(200).send({ data: response });
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::: update book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-const updateCategory = async(req, res) => {
+const updateCategory = async (req, res) => {
   const param = req.params;
-  const body = req.body
-  try{
-    await db.categories.findByIdAndUpdate(param.id,body)
+  const body = req.body;
+  try {
+    await db.categories.findByIdAndUpdate(param.id, body);
     res.status(200).send({
-      message:{
-        "update category with id " : param.id,
-      }
+      message: {
+        "update category with id ": param.id,
+      },
     });
-  }catch(error){
-    res.status(200).send({"error ": error});
+  } catch (error) {
+    res.status(200).send({ "error ": error });
   }
-  const cat = await db.categories.find()
-  io.emit("cat", cat )
+  const cat = await db.categories.find();
+  io.emit("cat", cat);
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::: delete book :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-const deleteCategory =async (req, res) => {
+const deleteCategory = async (req, res) => {
   const param = req.params;
-  try{
-    await db.categories.findOneAndDelete({_id:param.id})
+  try {
+    await db.categories.findOneAndDelete({ _id: param.id });
     res.status(200).send({
-      "deleted category with id" : param.id,
-      "status code":200,
+      "deleted category with id": param.id,
+      "status code": 200,
     });
-  }catch(error){
-    res.status(500).send({error:error || 'id not found!'})
+  } catch (error) {
+    res.status(500).send({ error: error || "id not found!" });
   }
 };
 
