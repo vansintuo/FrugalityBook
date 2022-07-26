@@ -30,7 +30,7 @@ app.use(express.json());
 // access to file path that store data in env file that it's hidden when we push to bitbucket
 dotenv.config({ path: "config.env" });
 // it is port that store in env file
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 5000;
 //call connection that connect to data base
 const connectionDB = require("./utils/db/connection");
 connectionDB();
