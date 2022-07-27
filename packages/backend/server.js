@@ -2,8 +2,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 // handle how to connect mongo cluster
-// mongoose.connect("mongodb+srv://phirun:fru123@cluster0.xw2us.mongodb.net/onlineBookstore?retryWrites=true&w=majority")
-// .then(()=>console.log('mongo cluster is connected : :::::::: ')).catch((error)=>console.log('connect mongo cluster is failed', error))
+mongoose
+  .connect(
+    "mongodb+srv://phirun:fru123@cluster0.xw2us.mongodb.net/onlineBookstore?retryWrites=true&w=majority"
+  )
+  .then(() => console.log("mongo cluster is connected : :::::::: "))
+  .catch((error) => console.log("connect mongo cluster is failed", error));
 // // type of whether what data user input
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -32,8 +36,8 @@ dotenv.config({ path: "config.env" });
 // it is port that store in env file
 const PORT = process.env.PORT || 5000;
 //call connection that connect to data base
-const connectionDB = require("./utils/db/connection");
-connectionDB();
+// const connectionDB = require("./utils/db/connection");
+// connectionDB();
 process.on("uncaughtException", function (err) {
   console.log(err);
 });
