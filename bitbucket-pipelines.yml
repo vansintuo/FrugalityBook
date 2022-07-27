@@ -12,6 +12,7 @@ pipelines:
           script:
             - cd packages/backend
             - npm install --legacy-peer-deps
+            - npm install -g jest
             - npm run test
       - step:
           name: "Deploy to heroku"
