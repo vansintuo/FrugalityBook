@@ -11,9 +11,8 @@ pipelines:
             - node
           script:
             - cd packages/backend
-            - npm install -g yarn
-            - yarn install
-            - yarn run test
+            - npm install --legacy-peer-deps
+            - npm run test
       - step:
           name: "Deploy to heroku"
           caches:
