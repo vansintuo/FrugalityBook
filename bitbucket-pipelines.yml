@@ -1,25 +1,38 @@
-image: atlassian/default-image:3
+# # image: 16.15.0
 
+# # pipelines:
+# #   default:
+# #     - step:
+# #         name: "testing on server"
+# #         caches:
+# #           - node
+# #         script:
+# #           - cd packages/backend
+# #           - npm install
+# #           - npm install -g jest
+# #           - npm run test
+# #     - step:
+# #         name: "deploy to heroku"
+# #         caches:
+# #           - node
+# #         script:
+# #           - cd packages/backend
+# #           - git init
+# #           - git config --global user.email "phirunoemark123@gmail.com"
+# #           - git config --global user.name "Phirun Oem"
+# #           - git add .
+# #           - git commit -m "deploy latest update"
+# #           - git push -f https://heroku:7f710994-d441-4e59-9356-550059fc46ed@git.heroku.com/frugalitybook.git HEAD:master
+image: 16.15.0
 pipelines:
-  default:
-    - step:
-        name: "testing on server"
-        caches:
-          - node
-        script:
-          - cd packages/backend
-          - npm install
-          - npm install -g jest
-          - npm run test
-    - step:
-        name: "deploy to heroku"
-        caches:
-          - node
-        script:
-          - cd packages/backend
-          - git init
-          - git config --global user.email "phirunoemark123@gmail.com"
-          - git config --global user.name "Phirun Oem"
-          - git add .
-          - git commit -m "deploy latest update"
-          - git push -f https://heroku:7f710994-d441-4e59-9356-550059fc46ed@git.heroku.com/frugalitybook.git HEAD:master
+  branches:
+    main:
+      #for seller
+      - step:
+          name: tesing on server
+          caches:
+            - node
+          script:
+            - cd packages/seller
+            - npm install
+            - npm run test
