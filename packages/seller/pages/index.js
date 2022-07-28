@@ -97,15 +97,15 @@ const useStyle = makeStyles({
   },
 });
 // ::::::::::::::::: use getServersideProps to get data (it's not loading) :::::::::::::::
-// export async function getServerSideProps(ctx) {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
-//   const dataProps = await res.json();
-//   return {
-//     props: {
-//       dataProps,
-//     },
-//   };
-// }
+export async function getServerSideProps(ctx) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
+  const dataProps = await res.json();
+  return {
+    props: {
+      dataProps,
+    },
+  };
+}
 const Home = ({ user, dataProps }) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -117,16 +117,16 @@ const Home = ({ user, dataProps }) => {
   }
 
   // ::::::::::::: called function convertPathToURL ::::::::::::::::
-  React.useEffect(() => {
-    console.log("data :::::::::;");
-    unauthorFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`).then(
-      (res) => {
-        if (res) {
-          setData(res);
-        }
-      }
-    );
-  }, []);
+  // React.useEffect(() => {
+  //   console.log("data :::::::::;", process.env.NEXT_PUBLIC_BASE_URL);
+  //   unauthorFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`).then(
+  //     (res) => {
+  //       if (res) {
+  //         setData(res.data);
+  //       }
+  //     }
+  //   );
+  // }, []);
   return (
     <div className={classes.bigContainer}>
       <Navbar user={user} />
@@ -187,19 +187,19 @@ const Home = ({ user, dataProps }) => {
         <SomeFact />
       </div>
       <div>
-        <NewArrival data={data} />
+        <NewArrival data={dataProps} />
       </div>
       <div>
         <HelpDonate />
       </div>
       <div>
-        <BestSeller data={data} />
+        <BestSeller data={dataProps} />
       </div>
       <div>
         <Testimonail />
       </div>
       <div>
-        <BookUnder5 data={data} />
+        <BookUnder5 data={dataProps} />
       </div>
     </div>
   );
