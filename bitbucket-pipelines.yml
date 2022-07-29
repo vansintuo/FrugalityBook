@@ -2,7 +2,7 @@ image: node:16.15.0
 pipelines:
   branches:
     main:
-      #for seller
+      #for server
       - step:
           name: "Tesing on server"
           caches:
@@ -24,3 +24,23 @@ pipelines:
             - git add .
             - git commit -m "deploy latest update"
             - git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
+    development:
+      #for seller
+      - step:
+          name: "Testing on seller"
+          caches:
+            - node
+          script:
+            - cd packages/seller
+            - npm install
+            - npm run test
+      #for server
+      - step:
+          name: "Tesing on server"
+          caches:
+            - node
+          script:
+            - cd packages/backend
+            - npm install --legacy-peer-deps
+            - npm install -g jest
+            - npm run test
