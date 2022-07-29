@@ -1,0 +1,22 @@
+image: node:16.15.0
+pipelines:
+  pull-requests:
+    "**":
+      - parallel:
+          #for seller
+          - step:
+              name: "Testing for seller"
+              caches:
+                - node
+              script:
+                - cd packages/seller
+                - npm install
+                - npm run test
+          #for api
+          - step:
+              name: "Testing for server"
+              script:
+                - cd packages/backend
+                - npm install --legacy-peer-deps
+                - npm install -g jest
+                - npm run test
