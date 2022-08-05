@@ -1,6 +1,6 @@
 import { fireAuth } from "../../../services/firebase";
 import axios from "axios";
-
+import { baseApiUrl } from "../../constant/baseUrls";
 //******************* Create User ************************** */
 export const createUser = async (
   fullname,
@@ -11,15 +11,12 @@ export const createUser = async (
   setOpenSU
 ) => {
   try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/signUp`,
-      {
-        fullname,
-        email,
-        password,
-        role,
-      }
-    );
+    const res = await axios.post(`${baseApiUrl}/api/v1/signUp`, {
+      fullname,
+      email,
+      password,
+      role,
+    });
     console.log("res :::::::::::::::::::: ", res.response);
     // setError(res.data.data)
     setOpenSU(true);
@@ -35,13 +32,10 @@ export const createUser = async (
 //***************** Sign In User  *******************************/
 async function signInUser(email, password) {
   try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/author/signIn`,
-      {
-        email,
-        password,
-      }
-    );
+    const res = await axios.post(`${baseApiUrl}/api/v1/author/signIn`, {
+      email,
+      password,
+    });
     console.log("res log in :::::::::::::::::::: ", res.data.data);
   } catch (error) {
     console.log(error);

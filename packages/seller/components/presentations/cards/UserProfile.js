@@ -1,13 +1,14 @@
-import { Avatar, Divider, IconButton, } from "@mui/material";
+import { Avatar, Divider, IconButton } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
 import EditIcon from "@mui/icons-material/Edit";
 import React from "react";
 import { signOutUser } from "../../../utils/functions/fireAuth";
-import {logOut} from '../../../utils/functions/auth/authUser';
+import { logOut } from "../../../utils/functions/auth/authUser";
 import { updateUser } from "../../../utils/functions/auth/authUser";
 import { useRouter } from "next/router";
+import { baseApiUrl } from "../../../utils/constant/baseUrls";
 const useStyle = makeStyles({
   container: {
     width: "100%",
@@ -17,7 +18,7 @@ const useStyle = makeStyles({
     borderRadius: "5px",
     position: "relative",
     color: "white",
-    fontSize:'15px',
+    fontSize: "15px",
   },
   subcontainer: {
     width: "100%",
@@ -38,16 +39,16 @@ const useStyle = makeStyles({
   },
   email: {
     position: "absolute",
-    width:'80%',
+    width: "80%",
     marginLeft: "10%",
     marginTop: "35%",
-    textAlign:'center',
+    textAlign: "center",
     "& h4": {
-      textAlign:'center',
+      textAlign: "center",
       lineHeight: "1px",
     },
     "& p": {
-      textAlign:'center',
+      textAlign: "center",
       lineHeight: "1px",
     },
   },
@@ -61,34 +62,35 @@ const useStyle = makeStyles({
     // },
   },
 });
-const UserProfile = ({user}) => {
+const UserProfile = ({ user }) => {
   const classes = useStyle();
-  const router = useRouter()
-  React.useEffect(()=>{
+  const router = useRouter();
+  React.useEffect(() => {
     // updateUser(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/user/${user._id}`,
     // {role: 'seller'}).then((res)=>{
     //   console.log('res ::::::::::', res)
     // })
-  })
- const handleUpdateUser = ()=>{
-  updateUser(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/user/${user._id}`,
-    {role: 'seller'}).then((res)=>{
-      router.push('localhost:3001')
-    })
- }
+  });
+  const handleUpdateUser = () => {
+    updateUser(`${baseApiUrl}/api/v1/user/${user._id}`, {
+      role: "seller",
+    }).then((res) => {
+      router.push("localhost:3001");
+    });
+  };
   return (
     <div className={classes.container}>
       <div className={classes.subcontainer}>
         <Avatar
           className={classes.profile}
           // alt={user.user.profile}
-          style={{color:'#00bdd7',fontSize:'60px'}}
+          style={{ color: "#00bdd7", fontSize: "60px" }}
         >
-         {/* {user.user.fullname} */}
+          {/* {user.user.fullname} */}
         </Avatar>
         <div className={classes.email}>
           <h4>{user.fullname}</h4>
-          <p style={{color:'rgba(255,255,255,0.6)'}}>{user.email}</p>
+          <p style={{ color: "rgba(255,255,255,0.6)" }}>{user.email}</p>
         </div>
       </div>
       <div className={classes.edit}>
@@ -101,10 +103,10 @@ const UserProfile = ({user}) => {
           </a>
         </Link>
         <br />
-        <Link href="#">
+        <Link href="/usersBasket">
           <a>
             <IconButton style={{ verticalAlign: "sub", color: "black" }}>
-              <ShoppingCart/>
+              <ShoppingCart />
             </IconButton>
             Your card
           </a>
@@ -113,25 +115,36 @@ const UserProfile = ({user}) => {
       </div>
       <Divider></Divider>
       <div className={classes.link}>
-      <button style={{
-              color:'rgb(3,91,98)',
-              border:'none',
-              height:'25px',
-              width:'100px',
-              marginRight:'30px',
-              fontWeight:'bold',
-              cursor:'pointer',
-              marginLeft:'15px',
-              borderRadius:'2px',
-              }}
-              onClick={logOut}
-              >Sign out</button>
-        <span >
-          <a style={{marginRight:'10px',}}>
-            {
-              Boolean(user?.fullname) && user?.role=='seller'?<Link href="/productList"><a>View your product</a></Link>:
-              <a onClick={()=>handleUpdateUser()} style={{marginRight:'12px',cursor:'pointer'}}>Sign in as a seller</a>
-            }
+        <button
+          style={{
+            color: "rgb(3,91,98)",
+            border: "none",
+            height: "25px",
+            width: "100px",
+            marginRight: "30px",
+            fontWeight: "bold",
+            cursor: "pointer",
+            marginLeft: "15px",
+            borderRadius: "2px",
+          }}
+          onClick={logOut}
+        >
+          Sign out
+        </button>
+        <span>
+          <a style={{ marginRight: "10px" }}>
+            {Boolean(user?.fullname) && user?.role == "seller" ? (
+              <Link href="/productList">
+                <a>View your product</a>
+              </Link>
+            ) : (
+              <a
+                onClick={() => handleUpdateUser()}
+                style={{ marginRight: "12px", cursor: "pointer" }}
+              >
+                Sign in as a seller
+              </a>
+            )}
           </a>
         </span>
       </div>

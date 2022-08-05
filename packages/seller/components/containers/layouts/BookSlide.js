@@ -15,6 +15,7 @@ const BookSlide = () => {
       left: "0%",
       top: "110%",
       marginLeft: "45%",
+      cursor: "pointer",
       "@media(max-width:1200px)": {
         display: "none",
       },
@@ -24,6 +25,7 @@ const BookSlide = () => {
         backgroundColor: "#00bdd7",
         lineHeight: "20px",
         color: "white",
+        marginLeft:"90%"
       },
     },
     prev: {
@@ -33,16 +35,19 @@ const BookSlide = () => {
       top: "110%",
       float: "left",
       marginRight: "15px",
+      cursor: "pointer",
       "@media(max-width:1200px)": {
         display: "none",
       },
       "& p": {
         width: "40px",
         height: "30px",
-        backgroundColor: "rgba(0, 189, 215,0.9)",
+        backgroundColor: "#00bdd7",
         lineHeight: "20px",
         color: "white",
+        marginLeft:"90%"
       },
+      
     },
   });
   const [imageIndex, setImageIndex] = React.useState(0);
@@ -53,9 +58,11 @@ const BookSlide = () => {
           <ArrowRightIcon
             style={{
               marginTop: "-10px",
-              marginRight: "-5px",
+              marginRight: "-10px",
               fontSize: "50px",
               cursor: "pointer",
+             
+              
             }}
           />
         </p>

@@ -26,7 +26,7 @@ const useStyle = makeStyles({
     marginTop: "-30px",
     padding: "15px",
     "& h3": {
-      marginBottom: "-20px",
+      marginBottom: "-15px",
     },
     "& p": { color: "grey" },
   },
@@ -58,14 +58,14 @@ const StudentSpeech = () => {
           />
           <div className={classes.name}>
             <h3 style={{ color: "#00bdd7" }}>Mr.JonhSon</h3>
-            <p>Takeo,Cambodia</p>
+            <p style={{ fontSize:"12px"}}>Takeo,Cambodia</p>
           </div>
         </div>
         <div className={classes.speech}>
-          <span>
+          <span style={{fontWeight:"normal", fontSize:"14px"}}>
             I think this website is good for me . I can share my old book to
             next young generation and I&apos;m so glad that I did like this.
-          </span>
+          </span >
         </div>
       </div>
     </div>

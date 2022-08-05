@@ -38,7 +38,11 @@ const BestSeller = ({ data }) => {
           Best-Selling
         </Typography>
         <Typography
-          style={{ display: "inline-block", marginLeft: "4px" ,   fontSize: "30px",}}
+          style={{
+            display: "inline-block",
+            marginLeft: "4px",
+            fontSize: "30px",
+          }}
           variant="h5"
         >
           Books
@@ -46,7 +50,11 @@ const BestSeller = ({ data }) => {
       </div>
       <div className={classes.bestSellerDescription}>
         <Typography
-          style={{ display: "inline-block", marginRight: "4px" ,marginTop:"10px" }}
+          style={{
+            display: "inline-block",
+            marginRight: "4px",
+            marginTop: "10px",
+          }}
           variant="subtitle1"
         >
           These are the best seller.
@@ -58,49 +66,53 @@ const BestSeller = ({ data }) => {
           They have been purchased regularly.
         </Typography>
       </div>
-      <Grid container rowSpacing={2} columnSpacing={2}>
-        {console.log("data book :::::", dataBook)}
-        {dataBook.map((item, index) => {
-          if (index <= 1)
-            return (
-              <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <BestSellerCard
-                    src={item.link}
-                    author={item.author}
-                    title={item.title}
-                    description={item.desc}
-                    href={`productDetail/${item._id}`}
-                  />
-                </div>
-              </Grid>
-            );
-        })}
-        {!isMatch ? (
-          <Grid item md={4} lg={4} xl={4}>
-            {dataBook.map((item, index) => {
-              if (index <= 2)
-                return (
-                  <div style={{ margin: "0px 0 10px 0" }} key={index}>
-                    <BestSellerCard2
+      <div style={{ marginTop: "30px" }}>
+        <Grid container rowSpacing={2} columnSpacing={2}>
+          {console.log("data book :::::", dataBook)}
+          {dataBook.map((item, index) => {
+            if (index <= 1)
+              return (
+                <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <BestSellerCard
                       src={item.link}
+                      author={item.author}
                       title={item.title}
                       description={item.desc}
-                      href={`/productDetail/${item._id}`}
+                      price={item.price}
+                      href={`productDetail/${item._id}`}
                     />
                   </div>
-                );
-            })}
-          </Grid>
-        ) : (
-          <div style={{ display: "none" }}></div>
-        )}
-      </Grid>
+                </Grid>
+              );
+          })}
+          {!isMatch ? (
+            <Grid item md={4} lg={4} xl={4}>
+              {dataBook.map((item, index) => {
+                if (index <= 2)
+                  return (
+                    <div style={{ margin: "0px 0 10px 0" }} key={index}>
+                      <BestSellerCard2
+                        src={item.link}
+                        title={item.title}
+                        description={item.desc}
+                        price={item.price}
+                        href={`/productDetail/${item._id}`}
+                      />
+                    </div>
+                  );
+              })}
+            </Grid>
+          ) : (
+            <div style={{ display: "none" }}></div>
+          )}
+        </Grid>
+      </div>
     </div>
   );
 };

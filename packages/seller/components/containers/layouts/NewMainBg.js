@@ -80,7 +80,7 @@ const NewMainBg = ({ user }) => {
                 >
                   REUSE BOOKS ARE GOOD BOOKS FOR ALL STUDENTS
                 </li>
-                <p style={{ width: "90%" }}>
+                <p style={{ width: "90%", fontWeight:"normal"}}>
                   Save time save money save book for next young generations ,
                   don&apos;t waste your books and keep them in safe!
                 </p>
@@ -89,7 +89,7 @@ const NewMainBg = ({ user }) => {
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
               {!user ? (
                 <div className={classes.singUp} onClick={() => setOpenSU(true)}>
-                  <p>Sign up</p>
+                  <p style={{fontWeight:"normal"}}>Sign up</p>
                 </div>
               ) : (
                 <div className={classes.singUp}>

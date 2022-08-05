@@ -11,7 +11,7 @@ const BookUnder5 = ({ data }) => {
     })
   })
   return (
-    <div style={{ backgroundColor: "rgba(242, 242, 240,0.2)", marginTop: '15px' }}>
+    <div style={{ marginTop: '40px' }}>
       <Grid container>
         <Grid item xs={12}>
           <div id="under5">

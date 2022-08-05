@@ -6,7 +6,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Typography } from "@mui/material";
 import Link from "next/link";
-const BestSellerCard2 = ({ src, title, description, href = "" }) => {
+const BestSellerCard2 = ({ src, title, description,price, href = "" }) => {
   const theme = useTheme();
   const matching = useMediaQuery(theme.breakpoints.up("md"));
   const useStyle = makeStyles({
@@ -66,6 +66,17 @@ const BestSellerCard2 = ({ src, title, description, href = "" }) => {
                   }}
                 >
                   {description}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  style={{
+                    overflow: "hidden",
+                    maxHeight: "50px",
+                    lineHeight: "2",
+                    color: "#00bdd7"
+                  }}
+                >
+                 Price: {price}$
                 </Typography>
               </Grid>
             </div>

@@ -16,6 +16,7 @@ import BookUnder5 from "../components/containers/layouts/BookUnder5";
 import BestSeller from "../components/containers/layouts/BestSeller";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { baseApiUrl } from "../utils/constant/baseUrls";
 const useStyle = makeStyles({
   bigContainer: {
     position: "relative",
@@ -98,7 +99,7 @@ const useStyle = makeStyles({
 });
 // ::::::::::::::::: use getServersideProps to get data (it's not loading) :::::::::::::::
 export async function getServerSideProps(ctx) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
+  const res = await fetch(`${baseApiUrl}/api/v1/books`);
 
   const dataProps = await res.json();
   return {
@@ -183,7 +184,7 @@ const Home = ({ user, dataProps }) => {
         <SomeFact />
       </div>
       <div>
-        <NewArrival data={dataProps} />
+       <NewArrival data={dataProps} />
       </div>
       <div>
         <HelpDonate />

@@ -5,10 +5,10 @@ import { Typography } from "@mui/material";
 import { Grid } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
+import { baseApiUrl } from "../utils/constant/baseUrls";
 // import emailjs from "emailjs-com";
 export default function Contact() {
   const [loading, setLoading] = React.useState(false);
-  console.log(`URL: ::::${process.env.NEXT_PUBLIC_BASE_URL}`);
   function handleSendEmail(e) {
     e.preventDefault();
     console.log(e.target);

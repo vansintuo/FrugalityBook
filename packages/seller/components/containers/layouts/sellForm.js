@@ -12,6 +12,7 @@ import Toastify from "../../presentations/Toastify";
 import updateState from "../../../states/updateState";
 import { useRecoilState } from "recoil";
 import "react-toastify/dist/ReactToastify.css";
+import { baseApiUrl } from "../../../utils/constant/baseUrls";
 const SellForm = ({
   onOpen,
   dataUpdate,
@@ -108,19 +109,16 @@ const SellForm = ({
             allImageNames.push(imgPath.name);
             allImagePaths.push(imgPath.fullPath);
             if (src.files.length == allImageNames.length) {
-              updateData(
-                `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/${dataUpdate._id}`,
-                {
-                  title: title.value,
-                  author: author.value,
-                  desc: desc.value,
-                  price: parseInt(price.value),
-                  status: status.value,
-                  category: category.value,
-                  allImageNames: allImageNames,
-                  allImagePaths: allImagePaths,
-                }
-              )
+              updateData(`${baseApiUrl}/api/v1/books/${dataUpdate._id}`, {
+                title: title.value,
+                author: author.value,
+                desc: desc.value,
+                price: parseInt(price.value),
+                status: status.value,
+                category: category.value,
+                allImageNames: allImageNames,
+                allImagePaths: allImagePaths,
+              })
                 .then((res) => {
                   Toastify(res.statusCode, res.message);
                   setLoading1(false);
@@ -143,17 +141,14 @@ const SellForm = ({
       console.log("data update ::::::::::: ", dataUpdate);
       setLoading1(true);
       // update only text
-      updateData(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/${dataUpdate._id}`,
-        {
-          title: title.value,
-          author: author.value,
-          desc: desc.value,
-          price: parseInt(price.value),
-          status: status.value,
-          category: category.value,
-        }
-      )
+      updateData(`${baseApiUrl}/api/v1/books/${dataUpdate._id}`, {
+        title: title.value,
+        author: author.value,
+        desc: desc.value,
+        price: parseInt(price.value),
+        status: status.value,
+        category: category.value,
+      })
         .then((res) => {
           Toastify(res.statusCode, res.message);
           setLoading1(false);
@@ -179,7 +174,7 @@ const SellForm = ({
               allImageNames.push(imgPath.name);
               allImagePaths.push(imgPath.fullPath);
               if (src.files.length == allImageNames.length) {
-                postData(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`, {
+                postData(`${baseApiUrl}/api/v1/books`, {
                   title: title.value,
                   author: author.value,
                   desc: desc.value,

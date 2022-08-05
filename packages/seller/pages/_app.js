@@ -10,9 +10,10 @@ import Footer from "../components/containers/Footer";
 import { redirectUser } from "../utils/functions/auth/authUser";
 import { destroyCookie, parseCookies } from "nookies";
 import { ToastContainer } from "react-toastify";
-import SearchBarLayout from "../components/containers/layouts/SearchBar";
 import Navbar from "../components/containers/layouts/Navbar";
 import axios from "axios";
+import SearchBarDialog from "../components/containers/layouts/SearchBarDialog";
+import { baseApiUrl } from "../utils/constant/baseUrls";
 const useStyle = makeStyles({
   container: {
     fontWeight: "bold",
@@ -52,7 +53,7 @@ function MyApp({ Component, pageProps, token }) {
           router.pathname == "/tryTest/toastify" ? (
             <>
               <Navbar user={pageProps?.user} />
-              <SearchBarLayout />
+              <SearchBarDialog />
               <SignUPDialog />
               <LoginDialog />
               <Component {...pageProps} user={pageProps?.user} />
@@ -61,7 +62,7 @@ function MyApp({ Component, pageProps, token }) {
           ) : (
             <>
               {/* <Navbar/> */}
-              <SearchBarLayout />
+              <SearchBarDialog />
               <SignUPDialog />
               <LoginDialog />
               <Component {...pageProps} user={pageProps?.user} />
@@ -113,14 +114,12 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   }
   // check if it has token
   try {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/currentUser`,
-      {
-        headers: {
-          "x-access-token": authorize.accessToken,
-        },
-      }
-    );
+    console.log(baseApiUrl);
+    const res = await axios.get(`${baseApiUrl}/api/v1/currentUser`, {
+      headers: {
+        "x-access-token": authorize.accessToken,
+      },
+    });
     const user = res.data.data;
     if (user) {
       ctx.pathname == "/" && redirectUser(ctx, "/home");

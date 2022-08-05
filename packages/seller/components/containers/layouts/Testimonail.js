@@ -9,7 +9,7 @@ const Testimonail = () => {
       backgroundImage: `url(${img})`,
       backgroundRepeat: "no-repeat",
       position: "relative",
-      marginTop: "5%",
+      marginTop: "60px",
       left: "0",
     },
     subContainer: {

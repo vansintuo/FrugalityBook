@@ -15,6 +15,7 @@ import CardProduct from "../components/presentations/cards/CardProduct";
 import SimpleButton from "../components/presentations/buttons/SimpleButton";
 import fetcher from "../utils/functions/api/fetcher";
 import CenterItem from "../components/presentations/CenterItem";
+import { baseApiUrl } from "../utils/constant/baseUrls";
 const useStyle = makeStyles({
   subContainer: {
     textAlign: "center",
@@ -44,24 +45,22 @@ const ProductList = ({ user }) => {
   const [editState, setEditState] = useRecoilState(updateState);
   //set state to handle product whether it return with value or empty array
   const [haveData, setHaveData] = React.useState(true);
-  const socket = useSocket(process.env.NEXT_PUBLIC_BASE_URL); //TODO
+  const socket = useSocket(baseApiUrl); //TODO
   let data = [];
   //called fetcher function to fetch data from API
   React.useEffect(async () => {
-    fetcher(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/seller`).then(
-      (res) => {
-        if (res) {
-          if (res.data == 0) {
-            setHaveData(false);
-          } else {
-            setHaveData(true);
-            convertPathToURL(res.data).then((res) => {
-              setProducts(res);
-            });
-          }
+    fetcher(`${baseApiUrl}/api/v1/books/seller`).then((res) => {
+      if (res) {
+        if (res.data == 0) {
+          setHaveData(false);
+        } else {
+          setHaveData(true);
+          convertPathToURL(res.data).then((res) => {
+            setProducts(res);
+          });
         }
       }
-    );
+    });
   }, []);
   React.useEffect(() => {
     //catch data from socket and put to function to display real time
@@ -88,7 +87,7 @@ const ProductList = ({ user }) => {
     setDataUpdate(item);
   }; // :::::::::::: delete data :::::::::::::::::::::::
   const handleDelete = (data) => {
-    deleteData(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books/${data._id}`)
+    deleteData(`${baseApiUrl}/api/v1/books/${data._id}`)
       .then((res) => {
         console.log("res::::", res);
         setOpenDelete(false);

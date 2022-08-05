@@ -1,13 +1,7 @@
 // exporting any method from mongo
 const express = require("express");
 const mongoose = require("mongoose");
-// handle how to connect mongo cluster
-mongoose
-  .connect(
-    "mongodb+srv://phirun:fru123@cluster0.xw2us.mongodb.net/onlineBookstore?retryWrites=true&w=majority"
-  )
-  .then(() => console.log("mongo cluster is connected : :::::::: "))
-  .catch((error) => console.log("connect mongo cluster is failed", error));
+const { databaseUrl, sellerBaseUrl } = require("./utils/constant/baseUrls");
 // // type of whether what data user input
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -36,16 +30,13 @@ dotenv.config({ path: "config.env" });
 // it is port that store in env file
 const PORT = process.env.PORT;
 //call connection that connect to data base
-// const connectionDB = require("./utils/db/connection");
-// connectionDB();
-process.on("uncaughtException", function (err) {
-  console.log(err);
-});
+const connectionDB = require("./utils/db/connection");
+connectionDB();
 // function socket.io;
 const io = socketio(server, {
   transports: ["polling"],
   cors: {
-    origin: ["http://localhost:3000", "http://localhost:3001"], // we can use array instead of if it has more than one url
+    origin: [sellerBaseUrl], // we can use array instead of if it has more than one url
   },
 });
 io.on("connection", (socket) => {
@@ -54,7 +45,7 @@ io.on("connection", (socket) => {
 module.exports = io;
 // calling rout from route files
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.send("This is Frugalitybook api!!");
 });
 require("./routers/book.routes")(app);
 require("./routers/user.routes")(app);
@@ -64,4 +55,6 @@ require("./routers/status.routes")(app);
 // listen is used to define port that we run on
 server.listen(PORT, () => {
   console.log(`server is starting  http://localhost:${PORT}`);
+  console.log(`seller base url :::${sellerBaseUrl}`);
+  console.log(`data base url :::::${databaseUrl}`);
 });

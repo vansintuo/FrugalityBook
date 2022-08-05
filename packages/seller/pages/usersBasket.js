@@ -1,20 +1,19 @@
 import { makeStyles } from "@mui/styles";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
-import { DialogContent, DialogTitle, Grid, Link } from "@mui/material";
-import { Button, Divider, TextField } from "@mui/material";
-import { Dialog, DialogActions, Paper, MenuItem } from "@mui/material";
+import { DialogTitle, Grid } from "@mui/material";
+import { Button } from "@mui/material";
+import { Dialog, DialogActions, Paper } from "@mui/material";
 import deleteData from "../utils/functions/api/deleteData";
 import { convertPathToURL } from "../utils/functions/data/convertPathToURL";
 import { useRouter } from "next/router";
 import useSocket from "../sockets/useSocket";
 import Toastify from "../components/presentations/Toastify";
-import unauthorFetch from "../utils/functions/api/unauthorFetch";
 import CheckoutButton from "../components/presentations/buttons/CheckoutButton";
 import CardProduct from "../components/presentations/cards/CardProduct";
-import SimpleButton from "../components/presentations/buttons/SimpleButton";
 import fetcher from "../utils/functions/api/fetcher";
-import { io } from "socket.io-client";
+import { baseApiUrl } from "../utils/constant/baseUrls";
+import CenterItem from "../components/presentations/CenterItem";
 const useStyle = makeStyles({
   container: {
     width: "80%",
@@ -104,31 +103,36 @@ const useStyle = makeStyles({
 });
 const UsersBasket = () => {
   const router = useRouter();
-  const socket = useSocket(process.env.NEXT_PUBLIC_BASE_URL);
+  const socket = useSocket(baseApiUrl);
   const classes = useStyle();
   const [products, setProducts] = React.useState([]);
   const [openDelete, setOpenDelete] = React.useState(false);
   const [openEdit, setOpenEdit] = React.useState(false);
   const [dataDelete, setDataDelete] = React.useState([]);
   const [totalPrice, setTotalPrice] = React.useState(0);
-  const [data, setData] = React.useState([]);
-  const [open, setOpen] = React.useState(false);
+  const [haveData, setHaveData] = React.useState(true);
   React.useEffect(async () => {
-    let dataStore = [];
-    await fetcher(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/checkouts`)
+    await fetcher(`${baseApiUrl}/api/v1/checkouts`)
       .then((res) => {
+        if (res.data.length == 0) setHaveData(false);
+        else setHaveData(true);
+        setTotalPrice(res.totalPrice);
         convertPathToURL(res.data).then((result) => {
           console.log("res ::::::", result);
           setProducts(result);
         });
       })
       .catch((error) => {
+        setHaveData(false);
         console.log("error:::", error);
       });
   }, []);
   React.useEffect(() => {
     if (socket) {
       socket.on("getCheckouts", async (data) => {
+        if (data.length == 0) setHaveData(false);
+        else setHaveData(true);
+        console.log("data:::", data);
         convertPathToURL(data).then((result) => {
           console.log("res ::::::", result);
           setProducts(result);
@@ -138,10 +142,9 @@ const UsersBasket = () => {
   }, [socket]);
   // :::::::::::: delete data :::::::::::::::::::::::
   const handleDelete = (data) => {
-    deleteData(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/checkouts/${data.checkoutId}`
-    )
+    deleteData(`${baseApiUrl}/api/v1/checkouts/${data.checkoutId}`)
       .then((res) => {
+        setTotalPrice(res.totalPrice);
         Toastify(res.statusCode, res.message);
         setOpenDelete(false);
       })
@@ -156,36 +159,36 @@ const UsersBasket = () => {
     setOpenDelete(true);
   };
   // function sell more
-  function addMore() {
-    router.push("/home");
-  }
   return (
     <div>
-      <Paper elevation={1} className={classes.subContainer}>
-        {products?.length == 0 ? (
-          <h3>Loading...</h3>
-        ) : (
-          <h3>
-            Your Baskets{" "}
-            <span style={{ color: "#00bdd7" }}>
-              ({products?.length} {products?.length >= 2 ? "items" : "item"} = $
-              {totalPrice} )
-            </span>
-          </h3>
-        )}
-      </Paper>
-      <div style={{ width: "80%", margin: "0 auto" }}>
-        <CheckoutButton
-          onClick={() =>
-            router.push(
-              "https://www.facebook.com/FrugalityBook-104791435445732"
-            )
-          }
-          style={{ float: "right", top: "2vh" }}
-        >
-          Checkout
-        </CheckoutButton>
-        {/* <SimpleButton
+      {products.length == 0 && haveData ? (
+        <CenterItem label={"Loading..."} />
+      ) : products.length == 0 && !haveData ? (
+        <CenterItem label={"Cart is empty!"} />
+      ) : (
+        <>
+          <Paper elevation={1} className={classes.subContainer}>
+            <h3>
+              Your Baskets{" "}
+              <span style={{ color: "#00bdd7" }}>
+                ({products?.length} {products?.length >= 2 ? "items" : "item"} =
+                ${totalPrice} )
+              </span>
+            </h3>
+          </Paper>
+          <div style={{ width: "80%", margin: "0 auto" }}>
+            {console.log("have data:::", haveData)}
+            <CheckoutButton
+              onClick={() =>
+                router.push(
+                  "https://www.facebook.com/FrugalityBook-104791435445732"
+                )
+              }
+              style={{ float: "right", top: "2vh" }}
+            >
+              Checkout
+            </CheckoutButton>
+            {/* <SimpleButton
           label={'Add More'}
           onClick={() => router.push('/')}
           style={{ 
@@ -195,30 +198,32 @@ const UsersBasket = () => {
             height:'37px',
             color:'black'
             }} /> */}
-      </div>
-      <div style={{ marginTop: "20px", marginBottom: "10px" }}>
-        {console.log("map:::::::", products)}
-        <Grid container rowSpacing={2}>
-          {products?.map((item, index) => {
-            return (
-              <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <CardProduct
-                    url={item.link}
-                    Desc={item.desc}
-                    Title={item.title}
-                    edit={false}
-                    Price={item.price}
-                    status={item.status}
-                    cat={item.category}
-                    onClickDelete={() => handleDeleteDialog(item)}
-                  />
-                </div>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </div>
+          </div>
+          <div style={{ marginTop: "20px", marginBottom: "10px" }}>
+            {console.log("map:::::::", products)}
+            <Grid container rowSpacing={2}>
+              {products?.map((item, index) => {
+                return (
+                  <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <CardProduct
+                        url={item.link}
+                        Desc={item.desc}
+                        Title={item.title}
+                        edit={false}
+                        Price={item.price}
+                        status={item.status}
+                        cat={item.category}
+                        onClickDelete={() => handleDeleteDialog(item)}
+                      />
+                    </div>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </div>
+        </>
+      )}
       {/* Dialog to delete Product */}
       <Dialog open={openDelete} onClose={() => setOpenDelete(false)}>
         <DialogTitle>Are you sure to delete this item?</DialogTitle>

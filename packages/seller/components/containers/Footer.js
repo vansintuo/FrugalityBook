@@ -10,6 +10,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   LinkClass: {
     color: "#36454F",
+    fontWeight:"normal",
     "&:hover": {
       color: "red",
     },
@@ -44,7 +45,7 @@ export default function Footer() {
               <Typography
                 style={{
                   borderBottom: "1px solid white",
-                  fontSize: "20px",
+                  fontSize: "16px",
                   color: "#36454F",
                   fontWeight: "bold",
                 }}
@@ -56,7 +57,7 @@ export default function Footer() {
                 <Link href="/homePage" color="inherit">
                   <a
                     className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", fontWeight:"normal" }}
                   >
                     Service
                   </a>
@@ -66,7 +67,7 @@ export default function Footer() {
                 <Link href="/aboutUs" color="inherit">
                   <a
                     className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none",fontWeight:"normal" }}
                   >
                     Member
                   </a>
@@ -81,7 +82,7 @@ export default function Footer() {
                 <Link href="/homePage" color="inherit">
                   <a
                     className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none",fontWeight:"normal" }}
                   >
                     {" "}
                     FAQs
@@ -93,7 +94,7 @@ export default function Footer() {
               <Typography
                 style={{
                   borderBottom: "1px solid white",
-                  fontSize: "20px",
+                  fontSize: "16px",
                   color: "#36454F",
                   fontWeight: "bold",
                 }}
@@ -106,7 +107,7 @@ export default function Footer() {
                 <Link href="/homePage" color="inherit">
                   <a
                     className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none",fontWeight:"normal" }}
                   >
                     {" "}
                     Management
@@ -117,7 +118,7 @@ export default function Footer() {
                 <Link href="/homePage" color="inherit">
                   <a
                     className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none",fontWeight:"normal" }}
                   >
                     Financce
                   </a>
@@ -127,7 +128,7 @@ export default function Footer() {
                 <Link href="/homePage" color="inherit">
                   <a
                     className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none",fontWeight:"normal" }}
                   >
                     Economic
                   </a>
@@ -137,7 +138,7 @@ export default function Footer() {
                 <Link href="/homePage" color="inherit">
                   <a
                     className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none",fontWeight:"normal" }}
                   >
                     {" "}
                     Programming
@@ -149,7 +150,7 @@ export default function Footer() {
               <Typography
                 style={{
                   borderBottom: "1px solid white",
-                  fontSize: "20px",
+                  fontSize: "16px",
                   color: "#36454F",
                   fontWeight: "bold",
                 }}
@@ -160,7 +161,7 @@ export default function Footer() {
                 <Link href="/homePage" color="inherit">
                   <a
                     className={classes.LinkClass}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none",fontWeight:"normal" }}
                   >
                     {" "}
                     Help

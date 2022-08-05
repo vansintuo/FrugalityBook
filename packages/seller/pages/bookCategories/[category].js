@@ -9,13 +9,14 @@ import ErrorPage from "../../components/containers/layouts/ErrorPage";
 import BestSellerCard from "../../components/presentations/cards/BestSellerCard";
 import { CircularProgress } from "@mui/material";
 import Footer from "../../components/containers/Footer";
+import { baseApiUrl } from "../../utils/constant/baseUrls";
 const Category = ({ user }) => {
   const [dataDetail, setDataDetail] = React.useState([]);
   const router = useRouter();
   const [haveData, setHaveData] = React.useState(true);
   const linkRouter = router.query.category;
   const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books?category=${linkRouter}`,
+    `${baseApiUrl}/api/v1/books?category=${linkRouter}`,
     unauthorFetch
   );
   React.useEffect(async () => {

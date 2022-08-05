@@ -9,7 +9,7 @@ const HelpDonate = ({onClick}) => {
     const img = '../../assets/donateBgPic.jpg'
     const useStyle = makeStyles(theme => ({
         container2: {
-            padding: theme.spacing(8, 0),
+            padding: theme.spacing(4, 0),
         },
         container: {
             backgroundImage: `url(${img})`,
@@ -76,7 +76,7 @@ const HelpDonate = ({onClick}) => {
                         <p style={{ marginTop: '0', marginBottom: '0', marginLeft:'40px' }}>Donate your book to our website ,
                          you can help alot of students in university.{" "}</p>
                          <p style={{width:'40px',height:'3px',backgroundColor:'#00bdd7', marginLeft:'40px'}}></p>
-                         <p style={{marginLeft:'40px'}} >Books that you donated to our website , we donate them to other students in university that good at student.</p>
+                         <p style={{marginLeft:'40px',fontWeight:"normal"}} >Books that you donated to our website , we donate them to other students in university that good at student.</p>
                          <div>
                     <Grid container>
                     <Grid item xs={6}>

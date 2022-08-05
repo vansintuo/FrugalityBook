@@ -16,6 +16,7 @@ import BestSeller from "../components/containers/layouts/BestSeller";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import unauthorFetch from "../utils/functions/api/unauthorFetch";
+import { baseApiUrl } from "../utils/constant/baseUrls";
 const useStyle = makeStyles({
   bigContainer: {
     position: "relative",
@@ -98,7 +99,7 @@ const useStyle = makeStyles({
 });
 // ::::::::::::::::: use getServersideProps to get data (it's not loading) :::::::::::::::
 export async function getServerSideProps(ctx) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`);
+  const res = await fetch(`${baseApiUrl}/api/v1/books`);
   const dataProps = await res.json();
   return {
     props: {
@@ -115,18 +116,6 @@ const Home = ({ user, dataProps }) => {
   if (user) {
     setUserStateValue(user);
   }
-
-  // ::::::::::::: called function convertPathToURL ::::::::::::::::
-  // React.useEffect(() => {
-  //   console.log("data :::::::::;", process.env.NEXT_PUBLIC_BASE_URL);
-  //   unauthorFetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/books`).then(
-  //     (res) => {
-  //       if (res) {
-  //         setData(res.data);
-  //       }
-  //     }
-  //   );
-  // }, []);
   return (
     <div className={classes.bigContainer}>
       <Navbar user={user} />
@@ -187,7 +176,7 @@ const Home = ({ user, dataProps }) => {
         <SomeFact />
       </div>
       <div>
-        <NewArrival data={dataProps} />
+      <NewArrival data={dataProps} />
       </div>
       <div>
         <HelpDonate />

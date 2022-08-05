@@ -24,21 +24,23 @@ const getCheckout = async (req, res) => {
   const userId = req.userId;
   try {
     const response = await db.checkouts.find({ userId: { $all: [userId] } });
-    console.log("response ::::::::", response);
     const allBooks = [];
+    let totalPrice = 0;
     for (var i = 0; i < response.length; i++) {
-      const bookId = response[i].bookId[0];
       const checkout = response[i]._id;
+      const bookId = response[i].bookId[0];
+      totalPrice = totalPrice + response[i].totalPrice;
       let book = await db.books.find({ _id: { $all: [bookId] } });
-      let finalBook = book[0].toObject();
-      finalBook.checkoutId = checkout;
+      const finalBook = book[0].toJSON({ versionKey: false });
+      finalBook["checkoutId"] = checkout;
       allBooks.push(finalBook);
     }
     if (allBooks.length == 0) {
-      res.status(200).send({ message: "No cart !" });
+      res.status(200).send({ message: "No cart !", data: [] });
     } else {
       io.emit("getCheckouts", allBooks);
       res.status(200).send({
+        totalPrice: totalPrice,
         data: allBooks,
         count: allBooks.length,
         statusCode: 200,
@@ -69,19 +71,26 @@ const deleteCheckout = async (req, res) => {
     await db.checkouts.findOneAndDelete({ _id: param.id });
     const response = await db.checkouts.find({ userId: { $all: [userId] } });
     const allBooks = [];
+    let totalPrice = 0;
     for (var i = 0; i < response.length; i++) {
       const bookId = response[i].bookId[0];
       const checkout = response[i]._id;
+      totalPrice = totalPrice + response[i].totalPrice;
       let book = await db.books.find({ _id: { $all: [bookId] } });
       let finalBook = book[0].toObject();
       finalBook.checkoutId = checkout;
       allBooks.push(finalBook);
     }
     if (allBooks.length == 0) {
-      res.status(200).send({ message: "No cart !" });
+      let data = [];
+      io.emit("getCheckouts", data);
+      res
+        .status(200)
+        .send({ message: "delete success !", statusCode: 200, data: [] });
     } else {
       io.emit("getCheckouts", allBooks);
       res.status(200).send({
+        totalPrice: totalPrice,
         data: allBooks,
         count: allBooks.length,
         statusCode: 200,

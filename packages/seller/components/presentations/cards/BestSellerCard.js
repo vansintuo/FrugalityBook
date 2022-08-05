@@ -6,7 +6,7 @@ import { useTheme } from "@mui/material/styles";
 import Image from "next/image";
 import Grid from "@mui/material/Grid";
 import Link from "next/link";
-const BestSellerCard = ({ src, title, author, description, href = "" }) => {
+const BestSellerCard = ({ src, title, author, description, price, href = "" }) => {
   const theme = useTheme();
   const match = useMediaQuery(theme.breakpoints.up("md"));
   const fix = useMediaQuery(theme.breakpoints.down("sm"));
@@ -77,6 +77,12 @@ const BestSellerCard = ({ src, title, author, description, href = "" }) => {
                 variant="body2"
               >
                 {description}
+              </Typography>
+              <Typography
+                style={{ maxHeight: "40px", overflow: "hidden", color: "#00bdd7" }}
+                variant="body2"
+              >
+               Price: {price}$
               </Typography>
             </div>
           </Grid>

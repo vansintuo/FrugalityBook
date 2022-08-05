@@ -1,9 +1,7 @@
 import jsCookie from "js-cookie";
 
 const deleteData = async (url, body) => {
-  console.log("called update :::::::;");
   const token = jsCookie.get("seller_token");
-  console.log("token::::::::::::", token);
   if (token) {
     const author = JSON.parse(token || {});
     let data = {};

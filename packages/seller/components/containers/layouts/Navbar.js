@@ -5,21 +5,21 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import DropDown from "./DropDown";
 import Link from "next/link";
-import { Avatar, Button } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { IconButton } from "@mui/material";
 import SimpleButton from "../../presentations/buttons/SimpleButton";
 import UserProfileCard from "../card/UserProfileCard";
-import { styled, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import { openSIState } from "../../../states/SignInSignUp";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { Search } from "@mui/icons-material";
 import openSearch from "../../../states/openSearch";
 import Image from "next/image";
-import NewSearchBar from "./NewSearchBar";
 import Drawerv1 from "./Drawerv1";
 const Navbar = ({ user }) => {
   console.log("user :::::::", user);
   const [openSI, setOpenSI] = useRecoilState(openSIState);
+  const [search, setSearch] = useRecoilState(openSearch);
   const theme = useTheme();
   const isMacth = useMediaQuery(theme.breakpoints.down("md"));
   const [responsiveAndHoverSearch, setResponsiveAndHoverSearch] =
@@ -53,12 +53,24 @@ const Navbar = ({ user }) => {
                   />
                 </Typography>
               </Link>
+              <IconButton
+                onClick={() => {
+                  setSearch(true);
+                }}
+                sx={{
+                  verticalAlign: "middle",
+                  marginLeft: "auto",
+                  color: search ? "" : "#00bdd7",
+                }}
+              >
+                <SearchIcon />
+              </IconButton>
               <Typography
                 sx={{
                   display: responsiveAndHoverSearch ? "none" : "",
-                  marginLeft: "auto",
                 }}
               >
+                {/* <Button>Click</Button> */}
                 <Drawerv1 user={user} />
               </Typography>
             </>
@@ -112,27 +124,45 @@ const Navbar = ({ user }) => {
                 <Link href="contact">Contact</Link>
               </Typography>
               {user && (
-                <Typography
-                  variant="h6"
-                  color="#00bdd7"
-                  sx={{
-                    cursor: "pointer",
-                    "&:hover": { color: "#dae6dd" },
-                    fontSize: "18px",
-                    marginLeft: 5,
-                  }}
-                >
-                  <Link href="sellProduct">
-                    <SimpleButton label="Sell" style={{ fontSize: "16px" }} />
-                  </Link>
-                </Typography>
+                <>
+                  <Typography
+                    variant="h6"
+                    color="#00bdd7"
+                    sx={{
+                      cursor: "pointer",
+                      "&:hover": { color: "#dae6dd" },
+                      fontSize: "18px",
+                      marginLeft: 5,
+                    }}
+                  >
+                    <Link href="sellProduct">
+                      <SimpleButton label="Sell" style={{ fontSize: "16px" }} />
+                    </Link>
+                  </Typography>
+                </>
               )}
               {isMacth ? (
                 ""
               ) : !user ? (
-                <Typography sx={{ marginLeft: "auto" }}>
-                  <SimpleButton label="Login" onClick={() => setOpenSI(true)} />
-                </Typography>
+                <>
+                  <IconButton
+                    onClick={() => {
+                      setSearch(true);
+                    }}
+                    sx={{
+                      marginLeft: "auto",
+                      color: search ? "" : "#00bdd7",
+                    }}
+                  >
+                    <SearchIcon />
+                  </IconButton>
+                  <Typography sx={{ marginLeft: "5px" }}>
+                    <SimpleButton
+                      label="Login"
+                      onClick={() => setOpenSI(true)}
+                    />
+                  </Typography>
+                </>
               ) : (
                 ""
               )}
@@ -148,6 +178,18 @@ const Navbar = ({ user }) => {
               </Typography>
               {user ? (
                 <>
+                  <IconButton
+                    onClick={() => {
+                      setSearch(true);
+                    }}
+                    // size="large"
+                    sx={{
+                      marginLeft: "auto",
+                      color: search ? "" : "#00bdd7",
+                    }}
+                  >
+                    <SearchIcon fontSize="medium" />
+                  </IconButton>
                   {/* <Typography sx={{ paddingLeft: '30px' }}>
                                     <Link href='/usersBasket' >
                                         <Badges icon={<ShoppingCartIcon />} colorBadgeContent='error' badgeContent={5} />
